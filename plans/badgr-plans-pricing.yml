@@ -1,0 +1,137 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Badgr
+providerId: badgr
+created: '2026-07-05'
+modified: '2026-07-05'
+reconciled: false
+tags:
+- Digital Badges
+- Open Badges
+- Micro-Credentials
+- Open Source
+- Plans
+description: >-
+  Badgr has two very different consumption models. The core server is open
+  source (badgr-server, GNU AGPL-3.0) and free to self-host, giving you the full
+  v2 API with no vendor fee. The hosted service - historically Badgr Free and
+  Badgr Pro, now operated by Instructure as Canvas Credentials / Parchment
+  Digital Badges - has moved from a freemium model toward enterprise pricing.
+  Under Instructure's transition, new free issuer accounts ended in mid-2025 and
+  free badge issuing was retired at the end of 2025, with former free issuers
+  converted to read-only Backpacks; ongoing issuing now requires a paid
+  institutional subscription. Paid pricing is not publicly listed and is quoted
+  by sales based on institution size, learner count, credential volume, and
+  add-ons. The API itself carries no separate fee - access is governed by your
+  plan and OAuth2 scopes.
+notes: >-
+  Exact hosted pricing is not published; contact Instructure/Parchment sales for
+  a quote. Self-hosting the open-source badgr-server is the only reliably free
+  path to the full API. Verify current tier names and cutover dates during
+  reconciliation - the product has been rebranded Badgr -> Canvas Credentials ->
+  Parchment Digital Badges.
+sources:
+- https://badgr.com
+- https://api.badgr.io/docs/v2/
+- https://github.com/concentricsky/badgr-server
+- https://support.badgr.com/en/knowledge/comparing-badgr-free-and-badgr-pro
+plans:
+- id: badgr-open-source
+  name: Open Source (Self-Hosted)
+  type: free
+  description: >-
+    The full badgr-server, GNU AGPL-3.0 licensed and self-hostable via Docker.
+    Includes Issuers, BadgeClasses, Assertions, the Backpack, Collections, the
+    OAuth2 provider, and the complete v2 REST API. Costs are limited to your own
+    infrastructure with no Badgr license fee.
+  entries:
+  - label: Self-Hosted Usage
+    name: self_hosted_usage
+    type: usage
+    metric: badges
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: free (self-hosted; you provide infrastructure)
+    userMultiplied: false
+  elements:
+  - name: Full v2 REST API
+  - name: Open Badges 2.0 / 2.1 Compliance
+  - name: OAuth2 Provider
+  - name: Backpack and Collections
+- id: badgr-free
+  name: Badgr Free / Canvas Badges Basic (legacy)
+  type: free
+  description: >-
+    The historical free hosted tier for simple badge issuing and a learner
+    Backpack. Under Instructure's transition, new free issuer accounts ended in
+    mid-2025 and free issuing was retired at the end of 2025, with former free
+    issuers converted to read-only Backpacks. Retained here for lineage.
+  entries:
+  - label: Free Issuing (retired)
+    name: free_issuing
+    type: usage
+    metric: badges
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $0 (legacy; free issuing retired end of 2025)
+    userMultiplied: false
+  elements:
+  - name: Basic Badge Issuing
+  - name: Learner Backpack
+- id: badgr-pro
+  name: Badgr Pro / Canvas Credentials (paid)
+  type: paid
+  description: >-
+    The paid hosted tier - branded Badgr Pro and now Canvas Credentials /
+    Parchment Digital Badges. Adds custom branding, pathways and stackable
+    learning, learner records, LMS/SSO integrations, analytics, and API access
+    at scale. Pricing is quoted by sales and not publicly listed.
+  entries:
+  - label: Subscription
+    name: pro_subscription
+    type: flat
+    metric: subscription
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales (quoted by institution size and volume)
+    userMultiplied: false
+  elements:
+  - name: Custom Branding
+  - name: Learning Pathways
+  - name: Learner Records
+  - name: LMS and SSO Integrations
+  - name: Analytics
+  - name: API Access at Scale
+- id: badgr-enterprise
+  name: Enterprise / Institutional
+  type: enterprise
+  description: >-
+    Custom institutional agreements for large deployments - district, university,
+    and enterprise scale - with SSO, security review, SLAs, dedicated support,
+    and negotiated credential volume. Contact Instructure / Parchment.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: SSO and SAML
+  - name: SLAs and Dedicated Support
+  - name: Negotiated Credential Volume
+  - name: Security and Compliance Review
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

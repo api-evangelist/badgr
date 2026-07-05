@@ -1,0 +1,553 @@
+openapi: 3.0.3
+info:
+  title: Badgr API
+  version: '2.0'
+  description: >-
+    REST API for the Badgr open digital badging platform (Instructure Canvas
+    Credentials), implementing the Open Badges standard. Endpoints and paths in
+    this document are grounded in the open-source badgr-server URL configuration
+    (apps/issuer, apps/backpack, apps/badgeuser) and Badgr's published v2 API
+    docs. Authentication is OAuth2 bearer token obtained from /o/token with the
+    scopes rw:profile, rw:issuer, and rw:backpack. Regional deployments share the
+    same paths under api.eu.badgr.io, api.ca.badgr.io, and api.au.badgr.io.
+  contact:
+    name: API Evangelist
+    email: kin@apievangelist.com
+  license:
+    name: Badgr API Terms / badgr-server GNU AGPL-3.0 (open source)
+    url: https://github.com/concentricsky/badgr-server
+servers:
+- url: https://api.badgr.io
+  description: Badgr US (production)
+- url: https://api.eu.badgr.io
+  description: Badgr EU region
+- url: https://api.ca.badgr.io
+  description: Badgr Canada region
+- url: https://api.au.badgr.io
+  description: Badgr Australia region
+tags:
+- name: Authentication
+- name: Issuers
+- name: BadgeClasses
+- name: Assertions
+- name: Backpack
+- name: Collections
+- name: Users
+security:
+- OAuth2: []
+paths:
+  /o/token:
+    post:
+      tags: [Authentication]
+      summary: Obtain an OAuth2 access token
+      description: >-
+        Exchange credentials (or a refresh token) for a bearer access token.
+        Accepts JSON, form-data, or x-www-form-urlencoded. Default scope granted
+        is `rw:profile rw:issuer rw:backpack`.
+      security: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                grant_type:
+                  type: string
+                  example: password
+                username:
+                  type: string
+                  description: Account email address.
+                password:
+                  type: string
+                refresh_token:
+                  type: string
+                scope:
+                  type: string
+                  example: rw:profile rw:issuer rw:backpack
+      responses:
+        '200':
+          description: Token issued.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token: { type: string }
+                  token_type: { type: string, example: Bearer }
+                  expires_in: { type: integer, example: 86400 }
+                  refresh_token: { type: string }
+                  scope: { type: string }
+        '400': { description: Invalid grant. }
+  /o/authorize:
+    get:
+      tags: [Authentication]
+      summary: OAuth2 authorization endpoint (authorization-code flow)
+      security: []
+      parameters:
+      - { name: client_id, in: query, required: true, schema: { type: string } }
+      - { name: response_type, in: query, required: true, schema: { type: string, example: code } }
+      - { name: redirect_uri, in: query, schema: { type: string } }
+      - { name: scope, in: query, schema: { type: string } }
+      responses:
+        '302': { description: Redirect back to the client with an authorization code. }
+  /o/code:
+    post:
+      tags: [Authentication]
+      summary: Exchange an authorization code for a token
+      security: []
+      responses:
+        '200': { description: Token issued. }
+  /v2/auth/tokens:
+    get:
+      tags: [Authentication]
+      summary: List issued access tokens
+      responses:
+        '200': { description: A list of access tokens for the authenticated user. }
+    post:
+      tags: [Authentication]
+      summary: Create an application access token
+      responses:
+        '201': { description: Access token created. }
+  /v2/auth/tokens/{entityId}:
+    parameters:
+    - { name: entityId, in: path, required: true, schema: { type: string } }
+    get:
+      tags: [Authentication]
+      summary: Get an access token
+      responses:
+        '200': { description: The access token. }
+    delete:
+      tags: [Authentication]
+      summary: Revoke an access token
+      responses:
+        '204': { description: Token revoked. }
+  /v2/issuers:
+    get:
+      tags: [Issuers]
+      summary: List issuers
+      responses:
+        '200':
+          description: A list of issuers the user can access.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { $ref: '#/components/schemas/Status' }
+                  result:
+                    type: array
+                    items: { $ref: '#/components/schemas/Issuer' }
+    post:
+      tags: [Issuers]
+      summary: Create an issuer
+      requestBody:
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/Issuer' }
+      responses:
+        '201': { description: Issuer created. }
+  /v2/issuers/changed:
+    get:
+      tags: [Issuers]
+      summary: List issuers changed since a timestamp
+      parameters:
+      - { name: since, in: query, schema: { type: string, format: date-time } }
+      responses:
+        '200': { description: Issuers changed since the given time. }
+  /v2/issuers/{entityId}:
+    parameters:
+    - { name: entityId, in: path, required: true, schema: { type: string } }
+    get:
+      tags: [Issuers]
+      summary: Get an issuer
+      responses:
+        '200': { description: The requested issuer. }
+    put:
+      tags: [Issuers]
+      summary: Update an issuer
+      responses:
+        '200': { description: Issuer updated. }
+    delete:
+      tags: [Issuers]
+      summary: Delete an issuer
+      responses:
+        '204': { description: Issuer deleted. }
+  /v2/issuers/{entityId}/badgeclasses:
+    parameters:
+    - { name: entityId, in: path, required: true, schema: { type: string } }
+    get:
+      tags: [BadgeClasses]
+      summary: List an issuer's badge classes
+      responses:
+        '200': { description: BadgeClasses for the issuer. }
+    post:
+      tags: [BadgeClasses]
+      summary: Create a badge class under an issuer
+      requestBody:
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/BadgeClass' }
+      responses:
+        '201': { description: BadgeClass created. }
+  /v2/issuers/{entityId}/assertions:
+    parameters:
+    - { name: entityId, in: path, required: true, schema: { type: string } }
+    get:
+      tags: [Assertions]
+      summary: List all assertions for an issuer
+      responses:
+        '200': { description: Assertions awarded by the issuer. }
+  /v2/badgeclasses:
+    get:
+      tags: [BadgeClasses]
+      summary: List all badge classes
+      responses:
+        '200':
+          description: All badge classes visible to the user.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { $ref: '#/components/schemas/Status' }
+                  result:
+                    type: array
+                    items: { $ref: '#/components/schemas/BadgeClass' }
+    post:
+      tags: [BadgeClasses]
+      summary: Create a badge class
+      requestBody:
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/BadgeClass' }
+      responses:
+        '201': { description: BadgeClass created. }
+  /v2/badgeclasses/changed:
+    get:
+      tags: [BadgeClasses]
+      summary: List badge classes changed since a timestamp
+      parameters:
+      - { name: since, in: query, schema: { type: string, format: date-time } }
+      responses:
+        '200': { description: BadgeClasses changed since the given time. }
+  /v2/badgeclasses/{entityId}:
+    parameters:
+    - { name: entityId, in: path, required: true, schema: { type: string } }
+    get:
+      tags: [BadgeClasses]
+      summary: Get a badge class
+      responses:
+        '200': { description: The requested badge class. }
+    put:
+      tags: [BadgeClasses]
+      summary: Update a badge class
+      responses:
+        '200': { description: BadgeClass updated. }
+    delete:
+      tags: [BadgeClasses]
+      summary: Delete a badge class
+      responses:
+        '204': { description: BadgeClass deleted. }
+  /v2/badgeclasses/{entityId}/issue:
+    parameters:
+    - { name: entityId, in: path, required: true, schema: { type: string } }
+    post:
+      tags: [Assertions]
+      summary: Batch issue assertions for a badge class
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                assertions:
+                  type: array
+                  items: { $ref: '#/components/schemas/Assertion' }
+      responses:
+        '201': { description: Assertions issued. }
+  /v2/badgeclasses/{entityId}/assertions:
+    parameters:
+    - { name: entityId, in: path, required: true, schema: { type: string } }
+    get:
+      tags: [Assertions]
+      summary: List assertions for a badge class
+      responses:
+        '200': { description: Assertions of the badge class. }
+    post:
+      tags: [Assertions]
+      summary: Issue an assertion of a badge class
+      requestBody:
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/Assertion' }
+      responses:
+        '201': { description: Assertion issued. }
+  /v2/assertions/{entityId}:
+    parameters:
+    - { name: entityId, in: path, required: true, schema: { type: string } }
+    get:
+      tags: [Assertions]
+      summary: Get an assertion
+      responses:
+        '200': { description: The requested assertion. }
+    put:
+      tags: [Assertions]
+      summary: Update an assertion
+      responses:
+        '200': { description: Assertion updated. }
+    delete:
+      tags: [Assertions]
+      summary: Revoke an assertion
+      responses:
+        '204': { description: Assertion revoked. }
+  /v2/assertions/revoke:
+    post:
+      tags: [Assertions]
+      summary: Batch revoke assertions
+      responses:
+        '200': { description: Assertions revoked. }
+  /v2/assertions/changed:
+    get:
+      tags: [Assertions]
+      summary: List assertions changed since a timestamp
+      parameters:
+      - { name: since, in: query, schema: { type: string, format: date-time } }
+      responses:
+        '200': { description: Assertions changed since the given time. }
+  /v2/backpack/assertions:
+    get:
+      tags: [Backpack]
+      summary: List assertions in the earner's backpack
+      responses:
+        '200': { description: Badges held by the authenticated earner. }
+  /v2/backpack/assertions/{entityId}:
+    parameters:
+    - { name: entityId, in: path, required: true, schema: { type: string } }
+    get:
+      tags: [Backpack]
+      summary: Get a backpack assertion
+      responses:
+        '200': { description: A single held badge. }
+    put:
+      tags: [Backpack]
+      summary: Update a backpack assertion (e.g. visibility)
+      responses:
+        '200': { description: Updated. }
+    delete:
+      tags: [Backpack]
+      summary: Remove an assertion from the backpack
+      responses:
+        '204': { description: Removed. }
+  /v2/backpack/assertions/{entityId}/image:
+    parameters:
+    - { name: entityId, in: path, required: true, schema: { type: string } }
+    get:
+      tags: [Backpack]
+      summary: Get the baked badge image for a backpack assertion
+      responses:
+        '200': { description: Baked Open Badges image. }
+  /v2/backpack/import:
+    post:
+      tags: [Backpack]
+      summary: Import an external Open Badge into the backpack
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url: { type: string }
+                image: { type: string }
+                assertion: { type: string }
+      responses:
+        '201': { description: Badge imported. }
+  /v2/backpack/share/assertion/{entityId}:
+    parameters:
+    - { name: entityId, in: path, required: true, schema: { type: string } }
+    put:
+      tags: [Backpack]
+      summary: Create a public share URL for a backpack assertion
+      responses:
+        '200': { description: Share URL created. }
+  /v2/backpack/collections:
+    get:
+      tags: [Collections]
+      summary: List the earner's collections
+      responses:
+        '200': { description: Collections owned by the earner. }
+    post:
+      tags: [Collections]
+      summary: Create a collection
+      requestBody:
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/Collection' }
+      responses:
+        '201': { description: Collection created. }
+  /v2/backpack/collections/{entityId}:
+    parameters:
+    - { name: entityId, in: path, required: true, schema: { type: string } }
+    get:
+      tags: [Collections]
+      summary: Get a collection
+      responses:
+        '200': { description: The requested collection. }
+    put:
+      tags: [Collections]
+      summary: Update a collection
+      responses:
+        '200': { description: Collection updated. }
+    delete:
+      tags: [Collections]
+      summary: Delete a collection
+      responses:
+        '204': { description: Collection deleted. }
+  /v2/backpack/share/collection/{entityId}:
+    parameters:
+    - { name: entityId, in: path, required: true, schema: { type: string } }
+    put:
+      tags: [Collections]
+      summary: Create a public share URL for a collection
+      responses:
+        '200': { description: Share URL created. }
+  /v2/users/self:
+    get:
+      tags: [Users]
+      summary: Get the authenticated user's profile
+      responses:
+        '200':
+          description: The current user's profile.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { $ref: '#/components/schemas/Status' }
+                  result:
+                    type: array
+                    items: { $ref: '#/components/schemas/User' }
+    put:
+      tags: [Users]
+      summary: Update the authenticated user's profile
+      responses:
+        '200': { description: Profile updated. }
+  /v2/users/{entityId}:
+    parameters:
+    - { name: entityId, in: path, required: true, schema: { type: string } }
+    get:
+      tags: [Users]
+      summary: Get a user
+      responses:
+        '200': { description: The requested user. }
+    put:
+      tags: [Users]
+      summary: Update a user
+      responses:
+        '200': { description: User updated. }
+  /v2/termsVersions/latest:
+    get:
+      tags: [Users]
+      summary: Get the latest terms of service version
+      responses:
+        '200': { description: The latest terms version. }
+components:
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        password:
+          tokenUrl: https://api.badgr.io/o/token
+          scopes:
+            rw:profile: Read and write the user profile
+            rw:issuer: Read and write issuers, badge classes, and assertions
+            rw:backpack: Read and write the earner backpack and collections
+        authorizationCode:
+          authorizationUrl: https://api.badgr.io/o/authorize
+          tokenUrl: https://api.badgr.io/o/token
+          scopes:
+            rw:profile: Read and write the user profile
+            rw:issuer: Read and write issuers, badge classes, and assertions
+            rw:backpack: Read and write the earner backpack and collections
+  schemas:
+    Status:
+      type: object
+      properties:
+        success: { type: boolean }
+        description: { type: string }
+    Issuer:
+      type: object
+      properties:
+        entityId: { type: string }
+        entityType: { type: string, example: Issuer }
+        openBadgeId: { type: string, format: uri }
+        name: { type: string }
+        description: { type: string }
+        url: { type: string, format: uri }
+        email: { type: string }
+        image: { type: string }
+        createdAt: { type: string, format: date-time }
+    BadgeClass:
+      type: object
+      properties:
+        entityId: { type: string }
+        entityType: { type: string, example: BadgeClass }
+        openBadgeId: { type: string, format: uri }
+        issuer: { type: string }
+        name: { type: string }
+        description: { type: string }
+        image: { type: string }
+        criteriaUrl: { type: string }
+        criteriaNarrative: { type: string }
+        tags:
+          type: array
+          items: { type: string }
+        alignments:
+          type: array
+          items: { type: object }
+    Assertion:
+      type: object
+      properties:
+        entityId: { type: string }
+        entityType: { type: string, example: Assertion }
+        openBadgeId: { type: string, format: uri }
+        badgeclass: { type: string }
+        issuer: { type: string }
+        recipient:
+          type: object
+          properties:
+            identity: { type: string }
+            type: { type: string, example: email }
+            hashed: { type: boolean }
+        image: { type: string }
+        issuedOn: { type: string, format: date-time }
+        narrative: { type: string }
+        evidence:
+          type: array
+          items: { type: object }
+        revoked: { type: boolean }
+        revocationReason: { type: string }
+    Collection:
+      type: object
+      properties:
+        entityId: { type: string }
+        entityType: { type: string, example: BackpackCollection }
+        name: { type: string }
+        description: { type: string }
+        share: { type: string }
+        published: { type: boolean }
+        assertions:
+          type: array
+          items: { type: string }
+    User:
+      type: object
+      properties:
+        entityId: { type: string }
+        entityType: { type: string, example: BadgeUser }
+        firstName: { type: string }
+        lastName: { type: string }
+        emails:
+          type: array
+          items: { type: object }
+        url:
+          type: array
+          items: { type: string }

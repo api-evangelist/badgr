@@ -1,0 +1,287 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Badgr API",
+    "version": "2.0",
+    "description": "Badgr open digital badging platform (Instructure Canvas Credentials), implementing the Open Badges standard. Core server is open source (github.com/concentricsky/badgr-server). Base URL https://api.badgr.io/v2. Auth is OAuth2 bearer token from /o/token with scopes rw:profile rw:issuer rw:backpack."
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{accessToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": { "name": "Authentication", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Obtain access token", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.badgr.io/o/token",
+            "auth": { "type": "none" },
+            "body": { "type": "urlencoded", "data": "grant_type=password&username=you@example.com&password=&scope=rw:profile rw:issuer rw:backpack" }
+          },
+          "docs": "Exchange credentials (or a refresh token) for an OAuth2 bearer access token."
+        },
+        {
+          "info": { "name": "List access tokens", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.badgr.io/v2/auth/tokens" },
+          "docs": "List application access tokens for the authenticated user."
+        },
+        {
+          "info": { "name": "Revoke access token", "type": "http" },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.badgr.io/v2/auth/tokens/:entityId",
+            "params": [ { "name": "entityId", "value": "", "type": "path", "description": "Access token entityId." } ]
+          },
+          "docs": "Revoke a specific access token."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Issuers", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List issuers", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.badgr.io/v2/issuers" },
+          "docs": "List issuers the authenticated user can access."
+        },
+        {
+          "info": { "name": "Create issuer", "type": "http" },
+          "http": { "method": "POST", "url": "https://api.badgr.io/v2/issuers", "body": { "type": "json", "data": "{\"name\":\"Example Issuer\",\"url\":\"https://example.com\",\"email\":\"badges@example.com\"}" } },
+          "docs": "Create a new issuer."
+        },
+        {
+          "info": { "name": "Get issuer", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.badgr.io/v2/issuers/:entityId",
+            "params": [ { "name": "entityId", "value": "", "type": "path", "description": "Issuer entityId." } ]
+          },
+          "docs": "Retrieve a single issuer by entityId."
+        },
+        {
+          "info": { "name": "Update issuer", "type": "http" },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.badgr.io/v2/issuers/:entityId",
+            "params": [ { "name": "entityId", "value": "", "type": "path", "description": "Issuer entityId." } ],
+            "body": { "type": "json", "data": "{\"name\":\"Example Issuer (updated)\"}" }
+          },
+          "docs": "Update an issuer."
+        },
+        {
+          "info": { "name": "Delete issuer", "type": "http" },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.badgr.io/v2/issuers/:entityId",
+            "params": [ { "name": "entityId", "value": "", "type": "path", "description": "Issuer entityId." } ]
+          },
+          "docs": "Delete an issuer."
+        },
+        {
+          "info": { "name": "List issuer badge classes", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.badgr.io/v2/issuers/:entityId/badgeclasses",
+            "params": [ { "name": "entityId", "value": "", "type": "path", "description": "Issuer entityId." } ]
+          },
+          "docs": "List badge classes belonging to an issuer."
+        },
+        {
+          "info": { "name": "List issuer assertions", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.badgr.io/v2/issuers/:entityId/assertions",
+            "params": [ { "name": "entityId", "value": "", "type": "path", "description": "Issuer entityId." } ]
+          },
+          "docs": "List all assertions awarded by an issuer."
+        }
+      ]
+    },
+    {
+      "info": { "name": "BadgeClasses", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List all badge classes", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.badgr.io/v2/badgeclasses" },
+          "docs": "List all badge classes visible to the user."
+        },
+        {
+          "info": { "name": "Create badge class under issuer", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.badgr.io/v2/issuers/:entityId/badgeclasses",
+            "params": [ { "name": "entityId", "value": "", "type": "path", "description": "Issuer entityId." } ],
+            "body": { "type": "json", "data": "{\"name\":\"Example Badge\",\"description\":\"Awarded for completing the example\",\"criteriaNarrative\":\"Complete the example task.\"}" }
+          },
+          "docs": "Create a badge class under an issuer."
+        },
+        {
+          "info": { "name": "Get badge class", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.badgr.io/v2/badgeclasses/:entityId",
+            "params": [ { "name": "entityId", "value": "", "type": "path", "description": "BadgeClass entityId." } ]
+          },
+          "docs": "Retrieve a badge class by entityId."
+        },
+        {
+          "info": { "name": "Update badge class", "type": "http" },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.badgr.io/v2/badgeclasses/:entityId",
+            "params": [ { "name": "entityId", "value": "", "type": "path", "description": "BadgeClass entityId." } ],
+            "body": { "type": "json", "data": "{\"description\":\"Updated description\"}" }
+          },
+          "docs": "Update a badge class."
+        },
+        {
+          "info": { "name": "Delete badge class", "type": "http" },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.badgr.io/v2/badgeclasses/:entityId",
+            "params": [ { "name": "entityId", "value": "", "type": "path", "description": "BadgeClass entityId." } ]
+          },
+          "docs": "Delete a badge class."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Assertions", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List badge class assertions", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.badgr.io/v2/badgeclasses/:entityId/assertions",
+            "params": [ { "name": "entityId", "value": "", "type": "path", "description": "BadgeClass entityId." } ]
+          },
+          "docs": "List assertions of a badge class."
+        },
+        {
+          "info": { "name": "Issue assertion", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.badgr.io/v2/badgeclasses/:entityId/assertions",
+            "params": [ { "name": "entityId", "value": "", "type": "path", "description": "BadgeClass entityId." } ],
+            "body": { "type": "json", "data": "{\"recipient\":{\"identity\":\"earner@example.com\",\"type\":\"email\",\"hashed\":true}}" }
+          },
+          "docs": "Issue (award) an assertion of a badge class to a recipient."
+        },
+        {
+          "info": { "name": "Batch issue assertions", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.badgr.io/v2/badgeclasses/:entityId/issue",
+            "params": [ { "name": "entityId", "value": "", "type": "path", "description": "BadgeClass entityId." } ],
+            "body": { "type": "json", "data": "{\"assertions\":[{\"recipient\":{\"identity\":\"a@example.com\",\"type\":\"email\",\"hashed\":true}}]}" }
+          },
+          "docs": "Batch issue multiple assertions of a badge class."
+        },
+        {
+          "info": { "name": "Get assertion", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.badgr.io/v2/assertions/:entityId",
+            "params": [ { "name": "entityId", "value": "", "type": "path", "description": "Assertion entityId." } ]
+          },
+          "docs": "Retrieve an assertion by entityId."
+        },
+        {
+          "info": { "name": "Revoke assertion", "type": "http" },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.badgr.io/v2/assertions/:entityId",
+            "params": [ { "name": "entityId", "value": "", "type": "path", "description": "Assertion entityId." } ]
+          },
+          "docs": "Revoke an assertion."
+        },
+        {
+          "info": { "name": "Batch revoke assertions", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.badgr.io/v2/assertions/revoke",
+            "body": { "type": "json", "data": "{\"assertions\":[{\"entityId\":\"\",\"revocationReason\":\"Issued in error\"}]}" }
+          },
+          "docs": "Batch revoke multiple assertions."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Backpack", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List backpack assertions", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.badgr.io/v2/backpack/assertions" },
+          "docs": "List badges held in the authenticated earner's backpack."
+        },
+        {
+          "info": { "name": "Import external badge", "type": "http" },
+          "http": { "method": "POST", "url": "https://api.badgr.io/v2/backpack/import", "body": { "type": "json", "data": "{\"url\":\"https://example.org/assertion.json\"}" } },
+          "docs": "Import an external Open Badge into the backpack."
+        },
+        {
+          "info": { "name": "Share backpack assertion", "type": "http" },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.badgr.io/v2/backpack/share/assertion/:entityId",
+            "params": [ { "name": "entityId", "value": "", "type": "path", "description": "Assertion entityId." } ]
+          },
+          "docs": "Create a public share URL for a backpack assertion."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Collections", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List collections", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.badgr.io/v2/backpack/collections" },
+          "docs": "List the earner's collections."
+        },
+        {
+          "info": { "name": "Create collection", "type": "http" },
+          "http": { "method": "POST", "url": "https://api.badgr.io/v2/backpack/collections", "body": { "type": "json", "data": "{\"name\":\"My Achievements\",\"description\":\"A curated set of badges\"}" } },
+          "docs": "Create a collection."
+        },
+        {
+          "info": { "name": "Get collection", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.badgr.io/v2/backpack/collections/:entityId",
+            "params": [ { "name": "entityId", "value": "", "type": "path", "description": "Collection entityId." } ]
+          },
+          "docs": "Retrieve a collection by entityId."
+        },
+        {
+          "info": { "name": "Delete collection", "type": "http" },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.badgr.io/v2/backpack/collections/:entityId",
+            "params": [ { "name": "entityId", "value": "", "type": "path", "description": "Collection entityId." } ]
+          },
+          "docs": "Delete a collection."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Users", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get own profile", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.badgr.io/v2/users/self" },
+          "docs": "Retrieve the authenticated user's profile."
+        },
+        {
+          "info": { "name": "Update own profile", "type": "http" },
+          "http": { "method": "PUT", "url": "https://api.badgr.io/v2/users/self", "body": { "type": "json", "data": "{\"firstName\":\"Kin\",\"lastName\":\"Lane\"}" } },
+          "docs": "Update the authenticated user's profile."
+        }
+      ]
+    }
+  ]
+}

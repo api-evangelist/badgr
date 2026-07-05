@@ -1,0 +1,181 @@
+aid: badgr
+url: https://raw.githubusercontent.com/api-evangelist/badgr/refs/heads/main/apis.yml
+name: Badgr
+kind: company
+description: Badgr is an open digital badging and micro-credentialing platform built
+  on the Open Badges standard. Originally created by Concentric Sky, Badgr is now
+  operated by Instructure as Canvas Credentials (and folded into Parchment Digital
+  Badges). It lets organizations issue verifiable, portable achievement badges and
+  learners collect them in a shareable Backpack. The platform is backed by the
+  open-source badgr-server (github.com/concentricsky/badgr-server), which implements
+  Open Badges 2.0/2.1 (Badge Connect). The documented REST API (base
+  https://api.badgr.io/v2, with regional deployments in the EU, Canada, and
+  Australia) uses OAuth2 bearer tokens and exposes Issuers, BadgeClasses,
+  Assertions (awarded badges), the learner Backpack, Collections, and Users.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Digital Badges
+- Open Badges
+- Micro-Credentials
+- Credentialing
+- Verifiable Credentials
+- Education
+- Open Source
+created: '2026-07-05'
+modified: '2026-07-05'
+specificationVersion: '0.19'
+apis:
+- aid: badgr:badgr-issuers-api
+  name: Badgr Issuers API
+  tags:
+  - Issuers
+  - Organizations
+  - Open Badges
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://api.badgr.io/docs/v2/
+  baseURL: https://api.badgr.io/v2
+  properties:
+  - url: https://api.badgr.io/docs/v2/
+    type: APIReference
+  - url: https://community.canvaslms.com/t5/Canvas-Badges/Canvas-Badges-App-Developers-API-Guide-Quickstart/ta-p/528729
+    type: Documentation
+  - url: openapi/badgr-openapi.yml
+    type: OpenAPI
+  description: Create, list, get, update, and delete Issuers - the organizations or
+    programs that award badges. Includes nested access to an issuer's BadgeClasses
+    and Assertions, plus an issuers/changed feed for syncing.
+- aid: badgr:badgr-badgeclasses-api
+  name: Badgr BadgeClasses API
+  tags:
+  - BadgeClasses
+  - Badge Definitions
+  - Open Badges
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://api.badgr.io/docs/v2/
+  baseURL: https://api.badgr.io/v2
+  properties:
+  - url: https://api.badgr.io/docs/v2/
+    type: APIReference
+  - url: https://community.canvaslms.com/t5/Canvas-Badges/Canvas-Badges-App-Developers-API-Guide-Quickstart/ta-p/528729
+    type: Documentation
+  - url: openapi/badgr-openapi.yml
+    type: OpenAPI
+  description: Define and manage BadgeClasses - the reusable badge templates (name,
+    description, image, criteria, alignments, and tags) that get awarded as
+    Assertions. Supports single and batch issuing plus a badgeclasses/changed feed.
+- aid: badgr:badgr-assertions-api
+  name: Badgr Assertions (Awarded Badges) API
+  tags:
+  - Assertions
+  - Awarded Badges
+  - Issuing
+  - Verification
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://api.badgr.io/docs/v2/
+  baseURL: https://api.badgr.io/v2
+  properties:
+  - url: https://api.badgr.io/docs/v2/
+    type: APIReference
+  - url: https://concentricsky.github.io/badge-connect-guide/
+    type: Documentation
+  - url: openapi/badgr-openapi.yml
+    type: OpenAPI
+  description: Issue, retrieve, update, and revoke Assertions - individual awards of
+    a BadgeClass to a named recipient. Assertions are the verifiable Open Badges
+    objects; supports single and batch issue, batch revoke, and an assertions/changed
+    feed.
+- aid: badgr:badgr-backpack-api
+  name: Badgr Backpack API
+  tags:
+  - Backpack
+  - Earners
+  - Portable Credentials
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://api.badgr.io/docs/v2/
+  baseURL: https://api.badgr.io/v2
+  properties:
+  - url: https://api.badgr.io/docs/v2/
+    type: APIReference
+  - url: https://concentricsky.github.io/badge-connect-guide/
+    type: Documentation
+  - url: openapi/badgr-openapi.yml
+    type: OpenAPI
+  description: The learner-side Backpack for badges an earner has received or imported
+    from any Open Badges issuer. List and manage held Assertions, import external
+    badges, retrieve baked badge images, and create public share links.
+- aid: badgr:badgr-collections-api
+  name: Badgr Collections API
+  tags:
+  - Collections
+  - Backpack
+  - Sharing
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://api.badgr.io/docs/v2/
+  baseURL: https://api.badgr.io/v2
+  properties:
+  - url: https://api.badgr.io/docs/v2/
+    type: APIReference
+  - url: https://concentricsky.github.io/badge-connect-guide/
+    type: Documentation
+  - url: openapi/badgr-openapi.yml
+    type: OpenAPI
+  description: Group Backpack Assertions into named Collections that learners can
+    curate and publish. Create, list, get, update, and delete collections, and
+    generate a public share URL for a collection.
+- aid: badgr:badgr-users-api
+  name: Badgr Users API
+  tags:
+  - Users
+  - Profiles
+  - Accounts
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://api.badgr.io/docs/v2/
+  baseURL: https://api.badgr.io/v2
+  properties:
+  - url: https://api.badgr.io/docs/v2/
+    type: APIReference
+  - url: https://community.canvaslms.com/t5/Canvas-Badges/Canvas-Badges-App-Developers-API-Guide-Quickstart/ta-p/528729
+    type: Documentation
+  - url: openapi/badgr-openapi.yml
+    type: OpenAPI
+  description: Read and update the authenticated user's profile via /users/self,
+    manage account emails and the latest terms version. Governs the identity behind
+    both issuing and earning.
+- aid: badgr:badgr-authentication-api
+  name: Badgr Authentication API
+  tags:
+  - Authentication
+  - OAuth2
+  - Access Tokens
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://api.badgr.io/docs/v2/
+  baseURL: https://api.badgr.io
+  properties:
+  - url: https://api.badgr.io/docs/v2/
+    type: APIReference
+  - url: https://community.canvaslms.com/t5/Canvas-Badges/Canvas-Badges-App-Developers-API-Guide-Quickstart/ta-p/528729
+    type: Documentation
+  - url: openapi/badgr-openapi.yml
+    type: OpenAPI
+  description: OAuth2 authentication surface. Exchange credentials for a bearer token
+    at /o/token (scopes rw:profile rw:issuer rw:backpack), run the authorization-code
+    flow at /o/authorize and /o/code, and list or revoke issued access tokens at
+    /v2/auth/tokens.
+common:
+- type: GitHubOrganization
+  url: https://github.com/concentricsky
+- type: LinkedIn
+  url: https://www.linkedin.com/company/instructure
+- type: Website
+  url: https://badgr.com
+- type: Documentation
+  url: https://api.badgr.io/docs/v2/
+- type: Plans
+  url: plans/badgr-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/badgr-rate-limits.yml
+- type: FinOps
+  url: finops/badgr-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

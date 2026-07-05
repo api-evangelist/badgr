@@ -1,0 +1,139 @@
+aid: badgr
+name: Badgr
+review:
+  question: Does Badgr expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-05'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. Badgr's public surface (the v2 REST API
+    plus the Open Badges public-verification JSON endpoints) is entirely
+    request/response HTTP over HTTPS. There is no server-push transport
+    (WebSocket or SSE) on Badgr's own API to model. Where clients need to detect
+    change, Badgr provides polling feeds (issuers/changed, badgeclasses/changed,
+    assertions/changed) rather than a streamed connection, so there is nothing to
+    describe with AsyncAPI.
+findings:
+  summary: |
+    Badgr does not publish a documented public WebSocket API. Badgr is an open
+    digital badging / micro-credentialing platform implementing the Open Badges
+    standard, originally built by Concentric Sky and now operated by Instructure
+    as Canvas Credentials (folded into Parchment Digital Badges). Its documented
+    v2 REST API (base https://api.badgr.io/v2, with regional deployments at
+    api.eu.badgr.io, api.ca.badgr.io, and api.au.badgr.io) is authenticated with
+    OAuth2 bearer tokens obtained from /o/token (scopes rw:profile, rw:issuer,
+    rw:backpack). It exposes Issuers, BadgeClasses, Assertions (awarded badges),
+    the earner Backpack, Collections, and Users - all as plain HTTPS
+    request/response REST. The open-source badgr-server (github.com/concentricsky/badgr-server,
+    GNU AGPL-3.0) confirms the same surface (apps: issuer, backpack, badgeuser,
+    composition) and its URL configuration is pure Django REST Framework HTTP.
+    Change detection is offered via polling *-changed feeds, not a streaming
+    socket. No realtime, bidirectional, or streaming WebSocket (ws:// or wss://)
+    endpoint is documented anywhere on Badgr's own API.
+  openSource: |
+    The core Badgr server is open source (badgr-server, GNU AGPL-3.0) and
+    self-hostable via Docker. It implements Open Badges 2.0 and the Open Badges
+    2.1 / Badge Connect federated-backpack workflows. Concentric Sky built Badgr;
+    Instructure acquired it and operates the hosted service as Canvas Credentials
+    / Parchment Digital Badges. Self-hosting gives the full v2 REST API with no
+    vendor fee; the hosted service moved from freemium toward enterprise pricing,
+    retiring free issuing at the end of 2025.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.badgr.io/v2
+      documented: true
+      note: v2 API for issuers, badgeclasses, assertions, backpack, collections, users. Regional bases at api.eu/ca/au.badgr.io share the same paths.
+    - protocol: OAuth2
+      scheme: https
+      baseURL: https://api.badgr.io/o
+      documented: true
+      note: Token endpoint /o/token (password and refresh_token grants), plus /o/authorize and /o/code for the authorization-code flow. Scopes rw:profile rw:issuer rw:backpack.
+    - protocol: Open Badges Public JSON
+      scheme: https
+      documented: true
+      note: Public, unauthenticated verification endpoints under /public/ serve standard Open Badges JSON for issuers, badges, assertions, and collections. Request/response HTTP, not WebSocket.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented anywhere in Badgr's v2 API, the Open Badges public API, or the open-source badgr-server URL configuration as of the review date.
+  endpointsConfirmed:
+    - POST   https://api.badgr.io/o/token
+    - GET    https://api.badgr.io/o/authorize
+    - POST   https://api.badgr.io/o/code
+    - POST   https://api.badgr.io/v2/auth/token
+    - GET    https://api.badgr.io/v2/auth/tokens
+    - POST   https://api.badgr.io/v2/auth/tokens
+    - GET    https://api.badgr.io/v2/auth/tokens/{entityId}
+    - DELETE https://api.badgr.io/v2/auth/tokens/{entityId}
+    - GET    https://api.badgr.io/v2/issuers
+    - POST   https://api.badgr.io/v2/issuers
+    - GET    https://api.badgr.io/v2/issuers/changed
+    - GET    https://api.badgr.io/v2/issuers/{entityId}
+    - PUT    https://api.badgr.io/v2/issuers/{entityId}
+    - DELETE https://api.badgr.io/v2/issuers/{entityId}
+    - GET    https://api.badgr.io/v2/issuers/{entityId}/badgeclasses
+    - POST   https://api.badgr.io/v2/issuers/{entityId}/badgeclasses
+    - GET    https://api.badgr.io/v2/issuers/{entityId}/assertions
+    - GET    https://api.badgr.io/v2/badgeclasses
+    - POST   https://api.badgr.io/v2/badgeclasses
+    - GET    https://api.badgr.io/v2/badgeclasses/changed
+    - GET    https://api.badgr.io/v2/badgeclasses/{entityId}
+    - PUT    https://api.badgr.io/v2/badgeclasses/{entityId}
+    - DELETE https://api.badgr.io/v2/badgeclasses/{entityId}
+    - POST   https://api.badgr.io/v2/badgeclasses/{entityId}/issue
+    - GET    https://api.badgr.io/v2/badgeclasses/{entityId}/assertions
+    - POST   https://api.badgr.io/v2/badgeclasses/{entityId}/assertions
+    - GET    https://api.badgr.io/v2/assertions/{entityId}
+    - PUT    https://api.badgr.io/v2/assertions/{entityId}
+    - DELETE https://api.badgr.io/v2/assertions/{entityId}
+    - POST   https://api.badgr.io/v2/assertions/revoke
+    - GET    https://api.badgr.io/v2/assertions/changed
+    - POST   https://api.badgr.io/v2/backpack/import
+    - GET    https://api.badgr.io/v2/backpack/assertions
+    - GET    https://api.badgr.io/v2/backpack/assertions/{entityId}
+    - PUT    https://api.badgr.io/v2/backpack/assertions/{entityId}
+    - DELETE https://api.badgr.io/v2/backpack/assertions/{entityId}
+    - GET    https://api.badgr.io/v2/backpack/assertions/{entityId}/image
+    - GET    https://api.badgr.io/v2/backpack/collections
+    - POST   https://api.badgr.io/v2/backpack/collections
+    - GET    https://api.badgr.io/v2/backpack/collections/{entityId}
+    - PUT    https://api.badgr.io/v2/backpack/collections/{entityId}
+    - DELETE https://api.badgr.io/v2/backpack/collections/{entityId}
+    - PUT    https://api.badgr.io/v2/backpack/share/assertion/{entityId}
+    - PUT    https://api.badgr.io/v2/backpack/share/collection/{entityId}
+    - GET    https://api.badgr.io/v2/users/self
+    - PUT    https://api.badgr.io/v2/users/self
+    - GET    https://api.badgr.io/v2/users/{entityId}
+    - PUT    https://api.badgr.io/v2/users/{entityId}
+    - GET    https://api.badgr.io/v2/termsVersions/latest
+  endpointsModeled:
+    - note: >-
+        The endpoints above are confirmed against the open-source badgr-server
+        URL configuration (apps/issuer/api_urls.py, apps/backpack/api_urls.py,
+        apps/badgeuser/api_urls.py) mounted under /v2 and /o. No endpoints were
+        invented beyond what the source and published docs define. The OpenAPI
+        document mirrors this exact surface.
+sources:
+  - url: https://api.badgr.io/docs/v2/
+    type: APIReference
+    note: Badgr v2 Swagger API reference (api.badgr.io). Regional docs at api.eu/ca/au.badgr.io/docs/v2/.
+  - url: https://community.canvaslms.com/t5/Canvas-Badges/Canvas-Badges-App-Developers-API-Guide-Quickstart/ta-p/528729
+    type: Documentation
+    note: Canvas Badges (Badgr) developer API quickstart - OAuth2 /o/token, scopes rw:profile rw:issuer rw:backpack, /v2/users/self.
+  - url: https://concentricsky.github.io/badge-connect-guide/
+    type: Documentation
+    note: Open Badges 2.1 Badge Connect guide - OAuth dance, federated backpack, /profile and /assertions workflows.
+  - url: https://github.com/concentricsky/badgr-server
+    type: SourceCode
+    note: Open-source (GNU AGPL-3.0) Badgr server. URL config confirms /v2 issuers, badgeclasses, assertions, backpack, collections, users, and /o OAuth2 endpoints. Pure Django REST HTTP; no WebSocket.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists. Badgr's own public API is entirely
+    request/response REST (the OAuth2-secured v2 API plus the unauthenticated
+    Open Badges public-verification JSON endpoints). Change detection is via
+    polling *-changed feeds, not a server-push socket, so no AsyncAPI document
+    was created - there is no streaming transport on Badgr's own API to model.

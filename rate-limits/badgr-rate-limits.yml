@@ -1,0 +1,68 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Badgr
+providerId: badgr
+created: '2026-07-05'
+modified: '2026-07-05'
+reconciled: false
+tags:
+- Digital Badges
+- Open Badges
+- Micro-Credentials
+- Rate Limiting
+- Quotas
+description: >-
+  Badgr does not publish fixed numeric rate limits for its v2 API. Access is
+  gated by OAuth2 - a bearer token from /o/token carrying the granted scopes
+  (rw:profile, rw:issuer, rw:backpack) - and by whatever plan or self-hosted
+  deployment you use rather than by a documented per-minute request cap. On the
+  hosted service, throughput is governed by your subscription and by
+  Instructure's platform protections. On self-hosted badgr-server, throughput is
+  bounded only by your own infrastructure and any throttling you configure in
+  Django REST Framework / the reverse proxy. Bulk workflows favor the batch
+  issue (/v2/badgeclasses/{id}/issue) and batch revoke (/v2/assertions/revoke)
+  endpoints and the *-changed feeds over tight per-record polling.
+notes: >-
+  Numeric per-account or per-endpoint limits are not documented as of the review
+  date. Access tokens expire (commonly ~24h) and should be refreshed via the
+  OAuth2 refresh_token grant. Self-hosters can add DRF throttling. Confirm any
+  hosted-plan quotas with Instructure / Parchment during reconciliation.
+sources:
+- https://api.badgr.io/docs/v2/
+- https://community.canvaslms.com/t5/Canvas-Badges/Canvas-Badges-App-Developers-API-Guide-Quickstart/ta-p/528729
+- https://github.com/concentricsky/badgr-server
+responseCodes:
+  throttled: 429
+  unauthorized: 401
+limits:
+- name: v2 API Requests
+  scope: token
+  metric: requests
+  limit: not published
+  notes: No fixed numeric request-rate limit is documented for the v2 API. Gated by OAuth2 scope and plan.
+- name: Self-Hosted Throughput
+  scope: deployment
+  metric: requests
+  limit: infrastructure-bound
+  notes: Constrained by your own badgr-server infrastructure and any DRF/proxy throttling you configure.
+- name: Access Token Lifetime
+  scope: token
+  metric: seconds
+  limit: token expiry (commonly ~86400s)
+  notes: Bearer tokens expire; refresh via the OAuth2 refresh_token grant at /o/token.
+- name: Hosted Plan Quotas
+  scope: account
+  metric: badges
+  limit: per plan
+  notes: Hosted Canvas Credentials / Parchment quotas depend on the institutional subscription.
+policies:
+- name: OAuth2 Scoped Access
+  description: Requests must present a bearer token whose scopes (rw:profile, rw:issuer, rw:backpack) cover the operation; missing scope returns 401/403.
+- name: Batch Over Poll
+  description: Use batch issue and batch revoke endpoints and the issuers/badgeclasses/assertions changed feeds instead of high-frequency per-record calls.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor Retry-After on 429 responses.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
