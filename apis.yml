@@ -162,6 +162,8 @@ apis:
     flow at /o/authorize and /o/code, and list or revoke issued access tokens at
     /v2/auth/tokens.
 common:
+- type: OAuthScopes
+  url: scopes/badgr-scopes.yml
 - type: GitHubOrganization
   url: https://github.com/concentricsky
 - type: LinkedIn

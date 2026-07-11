@@ -1,0 +1,34 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/badgr-openapi.yml
+schemes:
+- name: OAuth2
+  source: openapi/badgr-openapi.yml
+  flows:
+  - flow: password
+    tokenUrl: https://api.badgr.io/o/token
+  - flow: authorizationCode
+    authorizationUrl: https://api.badgr.io/o/authorize
+    tokenUrl: https://api.badgr.io/o/token
+scopes:
+- scope: rw:backpack
+  description: Read and write the earner backpack and collections
+  flows:
+  - authorizationCode
+  - password
+  sources:
+  - openapi/badgr-openapi.yml
+- scope: rw:issuer
+  description: Read and write issuers, badge classes, and assertions
+  flows:
+  - authorizationCode
+  - password
+  sources:
+  - openapi/badgr-openapi.yml
+- scope: rw:profile
+  description: Read and write the user profile
+  flows:
+  - authorizationCode
+  - password
+  sources:
+  - openapi/badgr-openapi.yml
