@@ -1,0 +1,22 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/badgr-openapi.yml
+summary:
+  types:
+  - oauth2
+  oauth2_flows:
+  - authorizationCode
+  - password
+schemes:
+- name: OAuth2
+  type: oauth2
+  flows:
+  - flow: password
+    tokenUrl: https://api.badgr.io/o/token
+    scopes: 3
+  - flow: authorizationCode
+    authorizationUrl: https://api.badgr.io/o/authorize
+    tokenUrl: https://api.badgr.io/o/token
+    scopes: 3
+  sources:
+  - openapi/badgr-openapi.yml

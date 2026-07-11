@@ -162,6 +162,10 @@ apis:
     flow at /o/authorize and /o/code, and list or revoke issued access tokens at
     /v2/auth/tokens.
 common:
+- type: DomainSecurity
+  url: security/badgr-domain-security.yml
+- type: Authentication
+  url: authentication/badgr-authentication.yml
 - type: OAuthScopes
   url: scopes/badgr-scopes.yml
 - type: GitHubOrganization
