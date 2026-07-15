@@ -162,6 +162,8 @@ apis:
     flow at /o/authorize and /o/code, and list or revoke issued access tokens at
     /v2/auth/tokens.
 common:
+- type: AgenticAccess
+  url: agentic-access/badgr-agentic-access.yml
 - type: DomainSecurity
   url: security/badgr-domain-security.yml
 - type: Authentication
