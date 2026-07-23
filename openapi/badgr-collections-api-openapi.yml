@@ -1,0 +1,126 @@
+openapi: 3.0.3
+info:
+  title: Badgr Assertions Collections API
+  version: '2.0'
+  description: REST API for the Badgr open digital badging platform (Instructure Canvas Credentials), implementing the Open Badges standard. Endpoints and paths in this document are grounded in the open-source badgr-server URL configuration (apps/issuer, apps/backpack, apps/badgeuser) and Badgr's published v2 API docs. Authentication is OAuth2 bearer token obtained from /o/token with the scopes rw:profile, rw:issuer, and rw:backpack. Regional deployments share the same paths under api.eu.badgr.io, api.ca.badgr.io, and api.au.badgr.io.
+  contact:
+    name: API Evangelist
+    email: kin@apievangelist.com
+  license:
+    name: Badgr API Terms / badgr-server GNU AGPL-3.0 (open source)
+    url: https://github.com/concentricsky/badgr-server
+servers:
+- url: https://api.badgr.io
+  description: Badgr US (production)
+- url: https://api.eu.badgr.io
+  description: Badgr EU region
+- url: https://api.ca.badgr.io
+  description: Badgr Canada region
+- url: https://api.au.badgr.io
+  description: Badgr Australia region
+security:
+- OAuth2: []
+tags:
+- name: Collections
+paths:
+  /v2/backpack/collections:
+    get:
+      tags:
+      - Collections
+      summary: List the earner's collections
+      responses:
+        '200':
+          description: Collections owned by the earner.
+    post:
+      tags:
+      - Collections
+      summary: Create a collection
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Collection'
+      responses:
+        '201':
+          description: Collection created.
+  /v2/backpack/collections/{entityId}:
+    parameters:
+    - name: entityId
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Collections
+      summary: Get a collection
+      responses:
+        '200':
+          description: The requested collection.
+    put:
+      tags:
+      - Collections
+      summary: Update a collection
+      responses:
+        '200':
+          description: Collection updated.
+    delete:
+      tags:
+      - Collections
+      summary: Delete a collection
+      responses:
+        '204':
+          description: Collection deleted.
+  /v2/backpack/share/collection/{entityId}:
+    parameters:
+    - name: entityId
+      in: path
+      required: true
+      schema:
+        type: string
+    put:
+      tags:
+      - Collections
+      summary: Create a public share URL for a collection
+      responses:
+        '200':
+          description: Share URL created.
+components:
+  schemas:
+    Collection:
+      type: object
+      properties:
+        entityId:
+          type: string
+        entityType:
+          type: string
+          example: BackpackCollection
+        name:
+          type: string
+        description:
+          type: string
+        share:
+          type: string
+        published:
+          type: boolean
+        assertions:
+          type: array
+          items:
+            type: string
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        password:
+          tokenUrl: https://api.badgr.io/o/token
+          scopes:
+            rw:profile: Read and write the user profile
+            rw:issuer: Read and write issuers, badge classes, and assertions
+            rw:backpack: Read and write the earner backpack and collections
+        authorizationCode:
+          authorizationUrl: https://api.badgr.io/o/authorize
+          tokenUrl: https://api.badgr.io/o/token
+          scopes:
+            rw:profile: Read and write the user profile
+            rw:issuer: Read and write issuers, badge classes, and assertions
+            rw:backpack: Read and write the earner backpack and collections

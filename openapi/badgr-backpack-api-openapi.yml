@@ -1,0 +1,127 @@
+openapi: 3.0.3
+info:
+  title: Badgr Assertions Backpack API
+  version: '2.0'
+  description: REST API for the Badgr open digital badging platform (Instructure Canvas Credentials), implementing the Open Badges standard. Endpoints and paths in this document are grounded in the open-source badgr-server URL configuration (apps/issuer, apps/backpack, apps/badgeuser) and Badgr's published v2 API docs. Authentication is OAuth2 bearer token obtained from /o/token with the scopes rw:profile, rw:issuer, and rw:backpack. Regional deployments share the same paths under api.eu.badgr.io, api.ca.badgr.io, and api.au.badgr.io.
+  contact:
+    name: API Evangelist
+    email: kin@apievangelist.com
+  license:
+    name: Badgr API Terms / badgr-server GNU AGPL-3.0 (open source)
+    url: https://github.com/concentricsky/badgr-server
+servers:
+- url: https://api.badgr.io
+  description: Badgr US (production)
+- url: https://api.eu.badgr.io
+  description: Badgr EU region
+- url: https://api.ca.badgr.io
+  description: Badgr Canada region
+- url: https://api.au.badgr.io
+  description: Badgr Australia region
+security:
+- OAuth2: []
+tags:
+- name: Backpack
+paths:
+  /v2/backpack/assertions:
+    get:
+      tags:
+      - Backpack
+      summary: List assertions in the earner's backpack
+      responses:
+        '200':
+          description: Badges held by the authenticated earner.
+  /v2/backpack/assertions/{entityId}:
+    parameters:
+    - name: entityId
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Backpack
+      summary: Get a backpack assertion
+      responses:
+        '200':
+          description: A single held badge.
+    put:
+      tags:
+      - Backpack
+      summary: Update a backpack assertion (e.g. visibility)
+      responses:
+        '200':
+          description: Updated.
+    delete:
+      tags:
+      - Backpack
+      summary: Remove an assertion from the backpack
+      responses:
+        '204':
+          description: Removed.
+  /v2/backpack/assertions/{entityId}/image:
+    parameters:
+    - name: entityId
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Backpack
+      summary: Get the baked badge image for a backpack assertion
+      responses:
+        '200':
+          description: Baked Open Badges image.
+  /v2/backpack/import:
+    post:
+      tags:
+      - Backpack
+      summary: Import an external Open Badge into the backpack
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+                image:
+                  type: string
+                assertion:
+                  type: string
+      responses:
+        '201':
+          description: Badge imported.
+  /v2/backpack/share/assertion/{entityId}:
+    parameters:
+    - name: entityId
+      in: path
+      required: true
+      schema:
+        type: string
+    put:
+      tags:
+      - Backpack
+      summary: Create a public share URL for a backpack assertion
+      responses:
+        '200':
+          description: Share URL created.
+components:
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        password:
+          tokenUrl: https://api.badgr.io/o/token
+          scopes:
+            rw:profile: Read and write the user profile
+            rw:issuer: Read and write issuers, badge classes, and assertions
+            rw:backpack: Read and write the earner backpack and collections
+        authorizationCode:
+          authorizationUrl: https://api.badgr.io/o/authorize
+          tokenUrl: https://api.badgr.io/o/token
+          scopes:
+            rw:profile: Read and write the user profile
+            rw:issuer: Read and write issuers, badge classes, and assertions
+            rw:backpack: Read and write the earner backpack and collections

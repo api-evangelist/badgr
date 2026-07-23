@@ -1,0 +1,126 @@
+openapi: 3.0.3
+info:
+  title: Badgr Assertions Users API
+  version: '2.0'
+  description: REST API for the Badgr open digital badging platform (Instructure Canvas Credentials), implementing the Open Badges standard. Endpoints and paths in this document are grounded in the open-source badgr-server URL configuration (apps/issuer, apps/backpack, apps/badgeuser) and Badgr's published v2 API docs. Authentication is OAuth2 bearer token obtained from /o/token with the scopes rw:profile, rw:issuer, and rw:backpack. Regional deployments share the same paths under api.eu.badgr.io, api.ca.badgr.io, and api.au.badgr.io.
+  contact:
+    name: API Evangelist
+    email: kin@apievangelist.com
+  license:
+    name: Badgr API Terms / badgr-server GNU AGPL-3.0 (open source)
+    url: https://github.com/concentricsky/badgr-server
+servers:
+- url: https://api.badgr.io
+  description: Badgr US (production)
+- url: https://api.eu.badgr.io
+  description: Badgr EU region
+- url: https://api.ca.badgr.io
+  description: Badgr Canada region
+- url: https://api.au.badgr.io
+  description: Badgr Australia region
+security:
+- OAuth2: []
+tags:
+- name: Users
+paths:
+  /v2/users/self:
+    get:
+      tags:
+      - Users
+      summary: Get the authenticated user's profile
+      responses:
+        '200':
+          description: The current user's profile.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    $ref: '#/components/schemas/Status'
+                  result:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/User'
+    put:
+      tags:
+      - Users
+      summary: Update the authenticated user's profile
+      responses:
+        '200':
+          description: Profile updated.
+  /v2/users/{entityId}:
+    parameters:
+    - name: entityId
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Users
+      summary: Get a user
+      responses:
+        '200':
+          description: The requested user.
+    put:
+      tags:
+      - Users
+      summary: Update a user
+      responses:
+        '200':
+          description: User updated.
+  /v2/termsVersions/latest:
+    get:
+      tags:
+      - Users
+      summary: Get the latest terms of service version
+      responses:
+        '200':
+          description: The latest terms version.
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        entityId:
+          type: string
+        entityType:
+          type: string
+          example: BadgeUser
+        firstName:
+          type: string
+        lastName:
+          type: string
+        emails:
+          type: array
+          items:
+            type: object
+        url:
+          type: array
+          items:
+            type: string
+    Status:
+      type: object
+      properties:
+        success:
+          type: boolean
+        description:
+          type: string
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        password:
+          tokenUrl: https://api.badgr.io/o/token
+          scopes:
+            rw:profile: Read and write the user profile
+            rw:issuer: Read and write issuers, badge classes, and assertions
+            rw:backpack: Read and write the earner backpack and collections
+        authorizationCode:
+          authorizationUrl: https://api.badgr.io/o/authorize
+          tokenUrl: https://api.badgr.io/o/token
+          scopes:
+            rw:profile: Read and write the user profile
+            rw:issuer: Read and write issuers, badge classes, and assertions
+            rw:backpack: Read and write the earner backpack and collections

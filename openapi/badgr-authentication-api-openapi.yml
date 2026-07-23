@@ -1,0 +1,165 @@
+openapi: 3.0.3
+info:
+  title: Badgr Assertions Authentication API
+  version: '2.0'
+  description: REST API for the Badgr open digital badging platform (Instructure Canvas Credentials), implementing the Open Badges standard. Endpoints and paths in this document are grounded in the open-source badgr-server URL configuration (apps/issuer, apps/backpack, apps/badgeuser) and Badgr's published v2 API docs. Authentication is OAuth2 bearer token obtained from /o/token with the scopes rw:profile, rw:issuer, and rw:backpack. Regional deployments share the same paths under api.eu.badgr.io, api.ca.badgr.io, and api.au.badgr.io.
+  contact:
+    name: API Evangelist
+    email: kin@apievangelist.com
+  license:
+    name: Badgr API Terms / badgr-server GNU AGPL-3.0 (open source)
+    url: https://github.com/concentricsky/badgr-server
+servers:
+- url: https://api.badgr.io
+  description: Badgr US (production)
+- url: https://api.eu.badgr.io
+  description: Badgr EU region
+- url: https://api.ca.badgr.io
+  description: Badgr Canada region
+- url: https://api.au.badgr.io
+  description: Badgr Australia region
+security:
+- OAuth2: []
+tags:
+- name: Authentication
+paths:
+  /o/token:
+    post:
+      tags:
+      - Authentication
+      summary: Obtain an OAuth2 access token
+      description: Exchange credentials (or a refresh token) for a bearer access token. Accepts JSON, form-data, or x-www-form-urlencoded. Default scope granted is `rw:profile rw:issuer rw:backpack`.
+      security: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                grant_type:
+                  type: string
+                  example: password
+                username:
+                  type: string
+                  description: Account email address.
+                password:
+                  type: string
+                refresh_token:
+                  type: string
+                scope:
+                  type: string
+                  example: rw:profile rw:issuer rw:backpack
+      responses:
+        '200':
+          description: Token issued.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                  token_type:
+                    type: string
+                    example: Bearer
+                  expires_in:
+                    type: integer
+                    example: 86400
+                  refresh_token:
+                    type: string
+                  scope:
+                    type: string
+        '400':
+          description: Invalid grant.
+  /o/authorize:
+    get:
+      tags:
+      - Authentication
+      summary: OAuth2 authorization endpoint (authorization-code flow)
+      security: []
+      parameters:
+      - name: client_id
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: response_type
+        in: query
+        required: true
+        schema:
+          type: string
+          example: code
+      - name: redirect_uri
+        in: query
+        schema:
+          type: string
+      - name: scope
+        in: query
+        schema:
+          type: string
+      responses:
+        '302':
+          description: Redirect back to the client with an authorization code.
+  /o/code:
+    post:
+      tags:
+      - Authentication
+      summary: Exchange an authorization code for a token
+      security: []
+      responses:
+        '200':
+          description: Token issued.
+  /v2/auth/tokens:
+    get:
+      tags:
+      - Authentication
+      summary: List issued access tokens
+      responses:
+        '200':
+          description: A list of access tokens for the authenticated user.
+    post:
+      tags:
+      - Authentication
+      summary: Create an application access token
+      responses:
+        '201':
+          description: Access token created.
+  /v2/auth/tokens/{entityId}:
+    parameters:
+    - name: entityId
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Authentication
+      summary: Get an access token
+      responses:
+        '200':
+          description: The access token.
+    delete:
+      tags:
+      - Authentication
+      summary: Revoke an access token
+      responses:
+        '204':
+          description: Token revoked.
+components:
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        password:
+          tokenUrl: https://api.badgr.io/o/token
+          scopes:
+            rw:profile: Read and write the user profile
+            rw:issuer: Read and write issuers, badge classes, and assertions
+            rw:backpack: Read and write the earner backpack and collections
+        authorizationCode:
+          authorizationUrl: https://api.badgr.io/o/authorize
+          tokenUrl: https://api.badgr.io/o/token
+          scopes:
+            rw:profile: Read and write the user profile
+            rw:issuer: Read and write issuers, badge classes, and assertions
+            rw:backpack: Read and write the earner backpack and collections

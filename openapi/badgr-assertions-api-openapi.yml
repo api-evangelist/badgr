@@ -1,0 +1,198 @@
+openapi: 3.0.3
+info:
+  title: Badgr Assertions API
+  version: '2.0'
+  description: REST API for the Badgr open digital badging platform (Instructure Canvas Credentials), implementing the Open Badges standard. Endpoints and paths in this document are grounded in the open-source badgr-server URL configuration (apps/issuer, apps/backpack, apps/badgeuser) and Badgr's published v2 API docs. Authentication is OAuth2 bearer token obtained from /o/token with the scopes rw:profile, rw:issuer, and rw:backpack. Regional deployments share the same paths under api.eu.badgr.io, api.ca.badgr.io, and api.au.badgr.io.
+  contact:
+    name: API Evangelist
+    email: kin@apievangelist.com
+  license:
+    name: Badgr API Terms / badgr-server GNU AGPL-3.0 (open source)
+    url: https://github.com/concentricsky/badgr-server
+servers:
+- url: https://api.badgr.io
+  description: Badgr US (production)
+- url: https://api.eu.badgr.io
+  description: Badgr EU region
+- url: https://api.ca.badgr.io
+  description: Badgr Canada region
+- url: https://api.au.badgr.io
+  description: Badgr Australia region
+security:
+- OAuth2: []
+tags:
+- name: Assertions
+paths:
+  /v2/issuers/{entityId}/assertions:
+    parameters:
+    - name: entityId
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Assertions
+      summary: List all assertions for an issuer
+      responses:
+        '200':
+          description: Assertions awarded by the issuer.
+  /v2/badgeclasses/{entityId}/issue:
+    parameters:
+    - name: entityId
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      tags:
+      - Assertions
+      summary: Batch issue assertions for a badge class
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                assertions:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Assertion'
+      responses:
+        '201':
+          description: Assertions issued.
+  /v2/badgeclasses/{entityId}/assertions:
+    parameters:
+    - name: entityId
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Assertions
+      summary: List assertions for a badge class
+      responses:
+        '200':
+          description: Assertions of the badge class.
+    post:
+      tags:
+      - Assertions
+      summary: Issue an assertion of a badge class
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Assertion'
+      responses:
+        '201':
+          description: Assertion issued.
+  /v2/assertions/{entityId}:
+    parameters:
+    - name: entityId
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Assertions
+      summary: Get an assertion
+      responses:
+        '200':
+          description: The requested assertion.
+    put:
+      tags:
+      - Assertions
+      summary: Update an assertion
+      responses:
+        '200':
+          description: Assertion updated.
+    delete:
+      tags:
+      - Assertions
+      summary: Revoke an assertion
+      responses:
+        '204':
+          description: Assertion revoked.
+  /v2/assertions/revoke:
+    post:
+      tags:
+      - Assertions
+      summary: Batch revoke assertions
+      responses:
+        '200':
+          description: Assertions revoked.
+  /v2/assertions/changed:
+    get:
+      tags:
+      - Assertions
+      summary: List assertions changed since a timestamp
+      parameters:
+      - name: since
+        in: query
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: Assertions changed since the given time.
+components:
+  schemas:
+    Assertion:
+      type: object
+      properties:
+        entityId:
+          type: string
+        entityType:
+          type: string
+          example: Assertion
+        openBadgeId:
+          type: string
+          format: uri
+        badgeclass:
+          type: string
+        issuer:
+          type: string
+        recipient:
+          type: object
+          properties:
+            identity:
+              type: string
+            type:
+              type: string
+              example: email
+            hashed:
+              type: boolean
+        image:
+          type: string
+        issuedOn:
+          type: string
+          format: date-time
+        narrative:
+          type: string
+        evidence:
+          type: array
+          items:
+            type: object
+        revoked:
+          type: boolean
+        revocationReason:
+          type: string
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        password:
+          tokenUrl: https://api.badgr.io/o/token
+          scopes:
+            rw:profile: Read and write the user profile
+            rw:issuer: Read and write issuers, badge classes, and assertions
+            rw:backpack: Read and write the earner backpack and collections
+        authorizationCode:
+          authorizationUrl: https://api.badgr.io/o/authorize
+          tokenUrl: https://api.badgr.io/o/token
+          scopes:
+            rw:profile: Read and write the user profile
+            rw:issuer: Read and write issuers, badge classes, and assertions
+            rw:backpack: Read and write the earner backpack and collections
