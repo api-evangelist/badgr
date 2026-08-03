@@ -1,0 +1,26 @@
+{
+  "provider": "badgr",
+  "sources": [
+    "badgr-assertions-api-openapi.yml",
+    "badgr-authentication-api-openapi.yml",
+    "badgr-backpack-api-openapi.yml",
+    "badgr-badgeclasses-api-openapi.yml",
+    "badgr-collections-api-openapi.yml",
+    "badgr-issuers-api-openapi.yml",
+    "badgr-users-api-openapi.yml"
+  ],
+  "outputs": [
+    "badgr-assertions-api-openapi.yml",
+    "badgr-authentication-api-openapi.yml",
+    "badgr-backpack-api-openapi.yml",
+    "badgr-badgeclasses-api-openapi.yml",
+    "badgr-collections-api-openapi.yml",
+    "badgr-issuers-api-openapi.yml",
+    "badgr-users-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
