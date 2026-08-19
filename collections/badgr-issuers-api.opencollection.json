@@ -1,0 +1,128 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Badgr Assertions Issuers API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://api.badgr.io/o/authorize",
+      "accessTokenUrl": "https://api.badgr.io/o/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Issuers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List issuers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.badgr.io/v2/issuers"
+          },
+          "docs": "List issuers"
+        },
+        {
+          "info": {
+            "name": "Create an issuer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.badgr.io/v2/issuers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an issuer"
+        },
+        {
+          "info": {
+            "name": "List issuers changed since a timestamp",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.badgr.io/v2/issuers/changed",
+            "params": [
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List issuers changed since a timestamp"
+        },
+        {
+          "info": {
+            "name": "Get an issuer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.badgr.io/v2/issuers/:entityId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get an issuer"
+        },
+        {
+          "info": {
+            "name": "Update an issuer",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.badgr.io/v2/issuers/:entityId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update an issuer"
+        },
+        {
+          "info": {
+            "name": "Delete an issuer",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.badgr.io/v2/issuers/:entityId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete an issuer"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

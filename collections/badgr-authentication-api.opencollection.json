@@ -1,0 +1,168 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Badgr Assertions Authentication API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://api.badgr.io/o/authorize",
+      "accessTokenUrl": "https://api.badgr.io/o/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Obtain an OAuth2 access token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.badgr.io/o/token",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "grant_type",
+                  "value": ""
+                },
+                {
+                  "name": "username",
+                  "value": ""
+                },
+                {
+                  "name": "password",
+                  "value": ""
+                },
+                {
+                  "name": "refresh_token",
+                  "value": ""
+                },
+                {
+                  "name": "scope",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Exchange credentials (or a refresh token) for a bearer access token. Accepts JSON, form-data, or x-www-form-urlencoded. Default scope granted is `rw:profile rw:issuer rw:backpack`."
+        },
+        {
+          "info": {
+            "name": "OAuth2 authorization endpoint (authorization-code flow)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.badgr.io/o/authorize",
+            "params": [
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "response_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "redirect_uri",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "scope",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "OAuth2 authorization endpoint (authorization-code flow)"
+        },
+        {
+          "info": {
+            "name": "Exchange an authorization code for a token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.badgr.io/o/code"
+          },
+          "docs": "Exchange an authorization code for a token"
+        },
+        {
+          "info": {
+            "name": "List issued access tokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.badgr.io/v2/auth/tokens"
+          },
+          "docs": "List issued access tokens"
+        },
+        {
+          "info": {
+            "name": "Create an application access token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.badgr.io/v2/auth/tokens"
+          },
+          "docs": "Create an application access token"
+        },
+        {
+          "info": {
+            "name": "Get an access token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.badgr.io/v2/auth/tokens/:entityId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get an access token"
+        },
+        {
+          "info": {
+            "name": "Revoke an access token",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.badgr.io/v2/auth/tokens/:entityId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Revoke an access token"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

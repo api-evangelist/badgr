@@ -1,0 +1,551 @@
+{
+  "item": [
+    {
+      "id": "87847df5-1c9c-45cc-afbd-bc90108c297a",
+      "name": "Issuers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "47124652-e98a-426c-b4be-889af3549a4e",
+          "name": "List issuers",
+          "request": {
+            "name": "List issuers",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "issuers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "46a0f907-a070-4d6b-bda7-2a7ef15100a6",
+              "name": "A list of issuers the user can access.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"success\": true,\n    \"description\": \"string\"\n  },\n  \"result\": [\n    {\n      \"entityId\": \"string\",\n      \"entityType\": \"Issuer\",\n      \"openBadgeId\": \"http://WqquYpBKcGCqFPBWglsGjNkg.qfiudNSliRuqZOLkm6fHaJ34yRJ5yYspCEohUylrJs\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"url\": \"http://RSHqUTwTYyvrEgxXWqGDGBmDKnMIjYb.saMg4zIj8KHIhe4JtGTpeDg\",\n      \"email\": \"string\",\n      \"image\": \"string\",\n      \"createdAt\": \"2001-10-11T14:43:59.166Z\"\n    },\n    {\n      \"entityId\": \"string\",\n      \"entityType\": \"Issuer\",\n      \"openBadgeId\": \"https://me.eyjcqcqzA\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"url\": \"http://RuxbhTuiAMWwYqzPmpYUtolXNpYBek.ghttT-KAEpKAByQ1mV.1GwqfYKncnGh46kb.5boUpG-HZ1drnrimYMz7PA.QlVNO3\",\n      \"email\": \"string\",\n      \"image\": \"string\",\n      \"createdAt\": \"1961-07-06T00:10:54.099Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "67c31b3e-7f19-47e5-8e5e-797d16c6296a",
+          "name": "Create an issuer",
+          "request": {
+            "name": "Create an issuer",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "issuers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"entityId\": \"<string>\",\n  \"entityType\": \"<string>\",\n  \"openBadgeId\": \"<uri>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"url\": \"<uri>\",\n  \"email\": \"<string>\",\n  \"image\": \"<string>\",\n  \"createdAt\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "997598e2-c50c-4514-a247-afed632b995f",
+              "name": "Issuer created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entityId\": \"<string>\",\n  \"entityType\": \"Issuer\",\n  \"openBadgeId\": \"<uri>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"url\": \"<uri>\",\n  \"email\": \"<string>\",\n  \"image\": \"<string>\",\n  \"createdAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "28df140e-ae32-461a-a5cb-c65f2a066030",
+          "name": "List issuers changed since a timestamp",
+          "request": {
+            "name": "List issuers changed since a timestamp",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "issuers",
+                "changed"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "since",
+                  "value": "<dateTime>"
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "26da1d8a-07f2-42b1-9770-728cad73be07",
+              "name": "Issuers changed since the given time.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    "changed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4b241e60-d852-4736-99bb-713405fad14e",
+          "name": "Get an issuer",
+          "request": {
+            "name": "Get an issuer",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "issuers",
+                ":entityId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entityId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ea71593f-d5b4-42f6-9fd2-1c038f418402",
+              "name": "The requested issuer.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":entityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0f90c940-410d-48e9-af44-ab7ca00ef19d",
+          "name": "Update an issuer",
+          "request": {
+            "name": "Update an issuer",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "issuers",
+                ":entityId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entityId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4d1cc91f-06dc-4712-81f1-198e08daa747",
+              "name": "Issuer updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":entityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "85371b99-6d20-47b0-8959-eaa3208d5e46",
+          "name": "Delete an issuer",
+          "request": {
+            "name": "Delete an issuer",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "issuers",
+                ":entityId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entityId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "04da9102-10c8-4313-9e35-877955e22bde",
+              "name": "Issuer deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":entityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.badgr.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "rw:profile rw:issuer rw:backpack"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://api.badgr.io/o/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "password_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1d27f990-7c5a-48d2-bfb1-179438323276",
+    "name": "Badgr Assertions Issuers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the Badgr open digital badging platform (Instructure Canvas Credentials), implementing the Open Badges standard. Endpoints and paths in this document are grounded in the open-source badgr-server URL configuration (apps/issuer, apps/backpack, apps/badgeuser) and Badgr's published v2 API docs. Authentication is OAuth2 bearer token obtained from /o/token with the scopes rw:profile, rw:issuer, and rw:backpack. Regional deployments share the same paths under api.eu.badgr.io, api.ca.badgr.io, and api.au.badgr.io.\n\nContact Support:\n Name: API Evangelist\n Email: kin@apievangelist.com",
+      "type": "text/plain"
+    }
+  }
+}

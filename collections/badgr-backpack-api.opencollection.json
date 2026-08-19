@@ -1,0 +1,146 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Badgr Assertions Backpack API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://api.badgr.io/o/authorize",
+      "accessTokenUrl": "https://api.badgr.io/o/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Backpack",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List assertions in the earner's backpack",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.badgr.io/v2/backpack/assertions"
+          },
+          "docs": "List assertions in the earner's backpack"
+        },
+        {
+          "info": {
+            "name": "Get a backpack assertion",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.badgr.io/v2/backpack/assertions/:entityId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a backpack assertion"
+        },
+        {
+          "info": {
+            "name": "Update a backpack assertion (e.g. visibility)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.badgr.io/v2/backpack/assertions/:entityId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update a backpack assertion (e.g. visibility)"
+        },
+        {
+          "info": {
+            "name": "Remove an assertion from the backpack",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.badgr.io/v2/backpack/assertions/:entityId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove an assertion from the backpack"
+        },
+        {
+          "info": {
+            "name": "Get the baked badge image for a backpack assertion",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.badgr.io/v2/backpack/assertions/:entityId/image",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the baked badge image for a backpack assertion"
+        },
+        {
+          "info": {
+            "name": "Import an external Open Badge into the backpack",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.badgr.io/v2/backpack/import",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Import an external Open Badge into the backpack"
+        },
+        {
+          "info": {
+            "name": "Create a public share URL for a backpack assertion",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.badgr.io/v2/backpack/share/assertion/:entityId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create a public share URL for a backpack assertion"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

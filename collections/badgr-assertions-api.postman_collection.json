@@ -1,0 +1,847 @@
+{
+  "item": [
+    {
+      "id": "f82dad58-64bb-4a0b-80be-a78acaa79eac",
+      "name": "Assertions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "be3d9491-3097-49d8-9394-9e8ebd0943cf",
+          "name": "List all assertions for an issuer",
+          "request": {
+            "name": "List all assertions for an issuer",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "issuers",
+                ":entityId",
+                "assertions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entityId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ca5efffc-6123-40fc-a769-1fbd79329dde",
+              "name": "Assertions awarded by the issuer.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":entityId",
+                    "assertions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4d8def8f-087e-4c9a-9ca2-ee911f5bcad5",
+          "name": "Batch issue assertions for a badge class",
+          "request": {
+            "name": "Batch issue assertions for a badge class",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "badgeclasses",
+                ":entityId",
+                "issue"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entityId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"assertions\": [\n    {\n      \"entityId\": \"<string>\",\n      \"entityType\": \"<string>\",\n      \"openBadgeId\": \"<uri>\",\n      \"badgeclass\": \"<string>\",\n      \"issuer\": \"<string>\",\n      \"recipient\": {\n        \"identity\": \"<string>\",\n        \"type\": \"<string>\",\n        \"hashed\": \"<boolean>\"\n      },\n      \"image\": \"<string>\",\n      \"issuedOn\": \"<dateTime>\",\n      \"narrative\": \"<string>\",\n      \"evidence\": [\n        \"<object>\",\n        \"<object>\"\n      ],\n      \"revoked\": \"<boolean>\",\n      \"revocationReason\": \"<string>\"\n    },\n    {\n      \"entityId\": \"<string>\",\n      \"entityType\": \"<string>\",\n      \"openBadgeId\": \"<uri>\",\n      \"badgeclass\": \"<string>\",\n      \"issuer\": \"<string>\",\n      \"recipient\": {\n        \"identity\": \"<string>\",\n        \"type\": \"<string>\",\n        \"hashed\": \"<boolean>\"\n      },\n      \"image\": \"<string>\",\n      \"issuedOn\": \"<dateTime>\",\n      \"narrative\": \"<string>\",\n      \"evidence\": [\n        \"<object>\",\n        \"<object>\"\n      ],\n      \"revoked\": \"<boolean>\",\n      \"revocationReason\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3240f148-2208-4a03-bcd0-cca52b297a2f",
+              "name": "Assertions issued.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "badgeclasses",
+                    ":entityId",
+                    "issue"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assertions\": [\n    {\n      \"entityId\": \"<string>\",\n      \"entityType\": \"Assertion\",\n      \"openBadgeId\": \"<uri>\",\n      \"badgeclass\": \"<string>\",\n      \"issuer\": \"<string>\",\n      \"recipient\": {\n        \"identity\": \"<string>\",\n        \"type\": \"email\",\n        \"hashed\": \"<boolean>\"\n      },\n      \"image\": \"<string>\",\n      \"issuedOn\": \"<dateTime>\",\n      \"narrative\": \"<string>\",\n      \"evidence\": [\n        \"<object>\",\n        \"<object>\"\n      ],\n      \"revoked\": \"<boolean>\",\n      \"revocationReason\": \"<string>\"\n    },\n    {\n      \"entityId\": \"<string>\",\n      \"entityType\": \"Assertion\",\n      \"openBadgeId\": \"<uri>\",\n      \"badgeclass\": \"<string>\",\n      \"issuer\": \"<string>\",\n      \"recipient\": {\n        \"identity\": \"<string>\",\n        \"type\": \"email\",\n        \"hashed\": \"<boolean>\"\n      },\n      \"image\": \"<string>\",\n      \"issuedOn\": \"<dateTime>\",\n      \"narrative\": \"<string>\",\n      \"evidence\": [\n        \"<object>\",\n        \"<object>\"\n      ],\n      \"revoked\": \"<boolean>\",\n      \"revocationReason\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1859e504-6fec-4e7a-a1f8-07eab169c2fa",
+          "name": "List assertions for a badge class",
+          "request": {
+            "name": "List assertions for a badge class",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "badgeclasses",
+                ":entityId",
+                "assertions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entityId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ebf727cc-0011-4aad-b6c8-d09b25914557",
+              "name": "Assertions of the badge class.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "badgeclasses",
+                    ":entityId",
+                    "assertions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5f586c1d-0e8e-4979-bbcc-1d980343727d",
+          "name": "Issue an assertion of a badge class",
+          "request": {
+            "name": "Issue an assertion of a badge class",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "badgeclasses",
+                ":entityId",
+                "assertions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entityId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"entityId\": \"<string>\",\n  \"entityType\": \"<string>\",\n  \"openBadgeId\": \"<uri>\",\n  \"badgeclass\": \"<string>\",\n  \"issuer\": \"<string>\",\n  \"recipient\": {\n    \"identity\": \"<string>\",\n    \"type\": \"<string>\",\n    \"hashed\": \"<boolean>\"\n  },\n  \"image\": \"<string>\",\n  \"issuedOn\": \"<dateTime>\",\n  \"narrative\": \"<string>\",\n  \"evidence\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"revoked\": \"<boolean>\",\n  \"revocationReason\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8c56db0f-eaec-4ea5-a3ed-308424a733c3",
+              "name": "Assertion issued.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "badgeclasses",
+                    ":entityId",
+                    "assertions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entityId\": \"<string>\",\n  \"entityType\": \"Assertion\",\n  \"openBadgeId\": \"<uri>\",\n  \"badgeclass\": \"<string>\",\n  \"issuer\": \"<string>\",\n  \"recipient\": {\n    \"identity\": \"<string>\",\n    \"type\": \"email\",\n    \"hashed\": \"<boolean>\"\n  },\n  \"image\": \"<string>\",\n  \"issuedOn\": \"<dateTime>\",\n  \"narrative\": \"<string>\",\n  \"evidence\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"revoked\": \"<boolean>\",\n  \"revocationReason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6d731b9c-5d17-44fe-9479-48dfacf4d993",
+          "name": "Get an assertion",
+          "request": {
+            "name": "Get an assertion",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "assertions",
+                ":entityId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entityId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b68ecc68-b57e-4496-8a25-a201f57f4704",
+              "name": "The requested assertion.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "assertions",
+                    ":entityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "62a0657f-a38a-4300-a096-a299c76fc7ae",
+          "name": "Update an assertion",
+          "request": {
+            "name": "Update an assertion",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "assertions",
+                ":entityId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entityId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ac72a61b-fb43-4202-a75d-ed42ccbefbe1",
+              "name": "Assertion updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "assertions",
+                    ":entityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ff93b5a3-4251-4a52-a907-08772dc67349",
+          "name": "Revoke an assertion",
+          "request": {
+            "name": "Revoke an assertion",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "assertions",
+                ":entityId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entityId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ca2e4827-b043-4011-897f-574e7884676a",
+              "name": "Assertion revoked.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "assertions",
+                    ":entityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b19f40d2-26ab-45d2-acb9-e1f653429497",
+          "name": "Batch revoke assertions",
+          "request": {
+            "name": "Batch revoke assertions",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "assertions",
+                "revoke"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7416a68c-0eb3-467e-a40c-dd4b2cc3a4ce",
+              "name": "Assertions revoked.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "assertions",
+                    "revoke"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "57c25a79-fb10-4f4e-819e-a787599c10ba",
+          "name": "List assertions changed since a timestamp",
+          "request": {
+            "name": "List assertions changed since a timestamp",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "assertions",
+                "changed"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "since",
+                  "value": "<dateTime>"
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f1710295-70a5-4f2b-b89a-1257fda0f394",
+              "name": "Assertions changed since the given time.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "assertions",
+                    "changed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.badgr.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "rw:profile rw:issuer rw:backpack"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://api.badgr.io/o/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "password_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "668afb31-61da-4e15-b576-4bba1105c4d2",
+    "name": "Badgr Assertions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the Badgr open digital badging platform (Instructure Canvas Credentials), implementing the Open Badges standard. Endpoints and paths in this document are grounded in the open-source badgr-server URL configuration (apps/issuer, apps/backpack, apps/badgeuser) and Badgr's published v2 API docs. Authentication is OAuth2 bearer token obtained from /o/token with the scopes rw:profile, rw:issuer, and rw:backpack. Regional deployments share the same paths under api.eu.badgr.io, api.ca.badgr.io, and api.au.badgr.io.\n\nContact Support:\n Name: API Evangelist\n Email: kin@apievangelist.com",
+      "type": "text/plain"
+    }
+  }
+}

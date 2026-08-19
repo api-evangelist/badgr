@@ -1,0 +1,168 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Badgr Assertions BadgeClasses API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://api.badgr.io/o/authorize",
+      "accessTokenUrl": "https://api.badgr.io/o/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "BadgeClasses",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List an issuer's badge classes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.badgr.io/v2/issuers/:entityId/badgeclasses",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List an issuer's badge classes"
+        },
+        {
+          "info": {
+            "name": "Create a badge class under an issuer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.badgr.io/v2/issuers/:entityId/badgeclasses",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a badge class under an issuer"
+        },
+        {
+          "info": {
+            "name": "List all badge classes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.badgr.io/v2/badgeclasses"
+          },
+          "docs": "List all badge classes"
+        },
+        {
+          "info": {
+            "name": "Create a badge class",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.badgr.io/v2/badgeclasses",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a badge class"
+        },
+        {
+          "info": {
+            "name": "List badge classes changed since a timestamp",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.badgr.io/v2/badgeclasses/changed",
+            "params": [
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List badge classes changed since a timestamp"
+        },
+        {
+          "info": {
+            "name": "Get a badge class",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.badgr.io/v2/badgeclasses/:entityId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a badge class"
+        },
+        {
+          "info": {
+            "name": "Update a badge class",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.badgr.io/v2/badgeclasses/:entityId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update a badge class"
+        },
+        {
+          "info": {
+            "name": "Delete a badge class",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.badgr.io/v2/badgeclasses/:entityId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a badge class"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

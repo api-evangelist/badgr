@@ -1,0 +1,193 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Badgr Assertions API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://api.badgr.io/o/authorize",
+      "accessTokenUrl": "https://api.badgr.io/o/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Assertions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all assertions for an issuer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.badgr.io/v2/issuers/:entityId/assertions",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List all assertions for an issuer"
+        },
+        {
+          "info": {
+            "name": "Batch issue assertions for a badge class",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.badgr.io/v2/badgeclasses/:entityId/issue",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Batch issue assertions for a badge class"
+        },
+        {
+          "info": {
+            "name": "List assertions for a badge class",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.badgr.io/v2/badgeclasses/:entityId/assertions",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List assertions for a badge class"
+        },
+        {
+          "info": {
+            "name": "Issue an assertion of a badge class",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.badgr.io/v2/badgeclasses/:entityId/assertions",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Issue an assertion of a badge class"
+        },
+        {
+          "info": {
+            "name": "Get an assertion",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.badgr.io/v2/assertions/:entityId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get an assertion"
+        },
+        {
+          "info": {
+            "name": "Update an assertion",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.badgr.io/v2/assertions/:entityId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update an assertion"
+        },
+        {
+          "info": {
+            "name": "Revoke an assertion",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.badgr.io/v2/assertions/:entityId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Revoke an assertion"
+        },
+        {
+          "info": {
+            "name": "Batch revoke assertions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.badgr.io/v2/assertions/revoke"
+          },
+          "docs": "Batch revoke assertions"
+        },
+        {
+          "info": {
+            "name": "List assertions changed since a timestamp",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.badgr.io/v2/assertions/changed",
+            "params": [
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List assertions changed since a timestamp"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
