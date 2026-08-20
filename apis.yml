@@ -33,6 +33,14 @@ tags:
 - Credentialing
 - Verifiable Credentials
 - Education
+- Open-Source
+tags_raw:
+- Digital Badges
+- Open Badges
+- Micro-Credentials
+- Credentialing
+- Verifiable Credentials
+- Education
 - Open Source
 created: '2026-07-05'
 modified: '2026-07-05'
@@ -112,6 +120,8 @@ apis:
   humanURL: https://api.badgr.io/docs/v2/
   baseURL: https://api.badgr.io/v2
   tags:
+  - Collection
+  tags_raw:
   - Collections
   properties:
   - type: OpenAPI
@@ -146,6 +156,8 @@ apis:
   humanURL: https://api.badgr.io/docs/v2/
   baseURL: https://api.badgr.io/v2
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
