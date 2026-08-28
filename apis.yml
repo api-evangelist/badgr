@@ -12,6 +12,18 @@ description: Badgr is an open digital badging and micro-credentialing platform b
   https://api.badgr.io/v2, with regional deployments in the EU, Canada, and
   Australia) uses OAuth2 bearer tokens and exposes Issuers, BadgeClasses,
   Assertions (awarded badges), the learner Backpack, Collections, and Users.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
