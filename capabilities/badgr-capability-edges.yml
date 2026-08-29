@@ -1,0 +1,39 @@
+slug: badgr
+provider: Badgr
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Education
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 2
+edges:
+- tag: BadgeClasses
+  spec_file: badgr-badgeclasses-api-openapi.yml
+  capability_id: BC-4720.50
+  capability_id_l1: BC-4720
+  capability_name: Graduation & Credentialing
+  confidence: 0.75
+  evidence: POST /v2/issuers/{entityId}/badgeclasses  Create a badge class under an issuer; implementing
+    the Open Badges standard
+  reason: 'Badge classes are the definitions of verifiable micro-credentials/achievements issued to learners.
+    This is credentialing — closest fit is Graduation & Credentialing (issuance of verifiable credentials,
+    certificates). Some ambiguity: a badge class is a credential template rather than a conferral event,
+    but the credentialing capability is the honest mapping.'
+- tag: Assertions
+  spec_file: badgr-assertions-api-openapi.yml
+  capability_id: BC-4720.50
+  capability_id_l1: BC-4720
+  capability_name: Graduation & Credentialing
+  confidence: 0.7
+  evidence: POST /v2/badgeclasses/{entityId}/assertions 'Issue an assertion of a badge class'; DELETE
+    /v2/assertions/{entityId} 'Revoke an assertion'
+  reason: Operations issue, batch-issue and revoke Open Badges assertions — i.e. issuance and lifecycle
+    of verifiable achievement credentials/micro-credentials to learners, matching credentialing/verifiable
+    credential issuance. Some ambiguity versus award & qualification issuance in the assessment domain,
+    so 0.7.

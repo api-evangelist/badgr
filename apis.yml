@@ -182,6 +182,9 @@ apis:
   - type: Documentation
     url: https://concentricsky.github.io/badge-connect-guide/
 common:
+- type: CapabilityMap
+  url: capabilities/badgr-capability-edges.yml
+  name: Badgr Business Capability Map
 - type: AgenticAccess
   url: agentic-access/badgr-agentic-access.yml
 - type: DomainSecurity
