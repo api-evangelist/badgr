@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Badgr Assertions BadgeClasses API
+  title: Badgr Badge Classes API
   version: '2.0'
-  description: REST API for the Badgr open digital badging platform (Instructure Canvas Credentials), implementing the Open Badges standard. Endpoints and paths in this document are grounded in the open-source badgr-server URL configuration (apps/issuer, apps/backpack, apps/badgeuser) and Badgr's published v2 API docs. Authentication is OAuth2 bearer token obtained from /o/token with the scopes rw:profile, rw:issuer, and rw:backpack. Regional deployments share the same paths under api.eu.badgr.io, api.ca.badgr.io, and api.au.badgr.io.
+  description: REST API for the Badgr open digital badging platform (Instructure Canvas Credentials), implementing the Open Badges standard.
   contact:
     name: API Evangelist
     email: kin@apievangelist.com
@@ -37,6 +37,8 @@ paths:
       responses:
         '200':
           description: BadgeClasses for the issuer.
+      operationId: getV2IssuersByEntityIdBadgeclasses
+      x-operation-id-source: derived
     post:
       tags:
       - BadgeClasses
@@ -49,6 +51,8 @@ paths:
       responses:
         '201':
           description: BadgeClass created.
+      operationId: postV2IssuersByEntityIdBadgeclasses
+      x-operation-id-source: derived
   /v2/badgeclasses:
     get:
       tags:
@@ -68,6 +72,8 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/BadgeClass'
+      operationId: getV2Badgeclasses
+      x-operation-id-source: derived
     post:
       tags:
       - BadgeClasses
@@ -80,6 +86,8 @@ paths:
       responses:
         '201':
           description: BadgeClass created.
+      operationId: postV2Badgeclasses
+      x-operation-id-source: derived
   /v2/badgeclasses/changed:
     get:
       tags:
@@ -94,6 +102,8 @@ paths:
       responses:
         '200':
           description: BadgeClasses changed since the given time.
+      operationId: getV2BadgeclassesChanged
+      x-operation-id-source: derived
   /v2/badgeclasses/{entityId}:
     parameters:
     - name: entityId
@@ -108,6 +118,8 @@ paths:
       responses:
         '200':
           description: The requested badge class.
+      operationId: getV2BadgeclassesByEntityId
+      x-operation-id-source: derived
     put:
       tags:
       - BadgeClasses
@@ -115,6 +127,8 @@ paths:
       responses:
         '200':
           description: BadgeClass updated.
+      operationId: putV2BadgeclassesByEntityId
+      x-operation-id-source: derived
     delete:
       tags:
       - BadgeClasses
@@ -122,6 +136,8 @@ paths:
       responses:
         '204':
           description: BadgeClass deleted.
+      operationId: deleteV2BadgeclassesByEntityId
+      x-operation-id-source: derived
 components:
   schemas:
     Status:

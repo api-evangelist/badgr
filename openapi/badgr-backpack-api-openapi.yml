@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Badgr Assertions Backpack API
+  title: Badgr Backpack API
   version: '2.0'
-  description: REST API for the Badgr open digital badging platform (Instructure Canvas Credentials), implementing the Open Badges standard. Endpoints and paths in this document are grounded in the open-source badgr-server URL configuration (apps/issuer, apps/backpack, apps/badgeuser) and Badgr's published v2 API docs. Authentication is OAuth2 bearer token obtained from /o/token with the scopes rw:profile, rw:issuer, and rw:backpack. Regional deployments share the same paths under api.eu.badgr.io, api.ca.badgr.io, and api.au.badgr.io.
+  description: REST API for the Badgr open digital badging platform (Instructure Canvas Credentials), implementing the Open Badges standard.
   contact:
     name: API Evangelist
     email: kin@apievangelist.com
@@ -31,6 +31,8 @@ paths:
       responses:
         '200':
           description: Badges held by the authenticated earner.
+      operationId: getV2BackpackAssertions
+      x-operation-id-source: derived
   /v2/backpack/assertions/{entityId}:
     parameters:
     - name: entityId
@@ -45,6 +47,8 @@ paths:
       responses:
         '200':
           description: A single held badge.
+      operationId: getV2BackpackAssertionsByEntityId
+      x-operation-id-source: derived
     put:
       tags:
       - Backpack
@@ -52,6 +56,8 @@ paths:
       responses:
         '200':
           description: Updated.
+      operationId: putV2BackpackAssertionsByEntityId
+      x-operation-id-source: derived
     delete:
       tags:
       - Backpack
@@ -59,6 +65,8 @@ paths:
       responses:
         '204':
           description: Removed.
+      operationId: deleteV2BackpackAssertionsByEntityId
+      x-operation-id-source: derived
   /v2/backpack/assertions/{entityId}/image:
     parameters:
     - name: entityId
@@ -73,6 +81,8 @@ paths:
       responses:
         '200':
           description: Baked Open Badges image.
+      operationId: getV2BackpackAssertionsByEntityIdImage
+      x-operation-id-source: derived
   /v2/backpack/import:
     post:
       tags:
@@ -93,6 +103,8 @@ paths:
       responses:
         '201':
           description: Badge imported.
+      operationId: postV2BackpackImport
+      x-operation-id-source: derived
   /v2/backpack/share/assertion/{entityId}:
     parameters:
     - name: entityId
@@ -107,6 +119,8 @@ paths:
       responses:
         '200':
           description: Share URL created.
+      operationId: putV2BackpackShareAssertionByEntityId
+      x-operation-id-source: derived
 components:
   securitySchemes:
     OAuth2:

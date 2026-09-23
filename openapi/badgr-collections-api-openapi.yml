@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Badgr Assertions Collections API
+  title: Badgr Collections API
   version: '2.0'
-  description: REST API for the Badgr open digital badging platform (Instructure Canvas Credentials), implementing the Open Badges standard. Endpoints and paths in this document are grounded in the open-source badgr-server URL configuration (apps/issuer, apps/backpack, apps/badgeuser) and Badgr's published v2 API docs. Authentication is OAuth2 bearer token obtained from /o/token with the scopes rw:profile, rw:issuer, and rw:backpack. Regional deployments share the same paths under api.eu.badgr.io, api.ca.badgr.io, and api.au.badgr.io.
+  description: REST API for the Badgr open digital badging platform (Instructure Canvas Credentials), implementing the Open Badges standard.
   contact:
     name: API Evangelist
     email: kin@apievangelist.com
@@ -31,6 +31,8 @@ paths:
       responses:
         '200':
           description: Collections owned by the earner.
+      operationId: getV2BackpackCollections
+      x-operation-id-source: derived
     post:
       tags:
       - Collections
@@ -43,6 +45,8 @@ paths:
       responses:
         '201':
           description: Collection created.
+      operationId: postV2BackpackCollections
+      x-operation-id-source: derived
   /v2/backpack/collections/{entityId}:
     parameters:
     - name: entityId
@@ -57,6 +61,8 @@ paths:
       responses:
         '200':
           description: The requested collection.
+      operationId: getV2BackpackCollectionsByEntityId
+      x-operation-id-source: derived
     put:
       tags:
       - Collections
@@ -64,6 +70,8 @@ paths:
       responses:
         '200':
           description: Collection updated.
+      operationId: putV2BackpackCollectionsByEntityId
+      x-operation-id-source: derived
     delete:
       tags:
       - Collections
@@ -71,6 +79,8 @@ paths:
       responses:
         '204':
           description: Collection deleted.
+      operationId: deleteV2BackpackCollectionsByEntityId
+      x-operation-id-source: derived
   /v2/backpack/share/collection/{entityId}:
     parameters:
     - name: entityId
@@ -85,6 +95,8 @@ paths:
       responses:
         '200':
           description: Share URL created.
+      operationId: putV2BackpackShareCollectionByEntityId
+      x-operation-id-source: derived
 components:
   schemas:
     Collection:

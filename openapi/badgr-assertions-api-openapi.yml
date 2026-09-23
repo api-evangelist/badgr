@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Badgr Assertions API
   version: '2.0'
-  description: REST API for the Badgr open digital badging platform (Instructure Canvas Credentials), implementing the Open Badges standard. Endpoints and paths in this document are grounded in the open-source badgr-server URL configuration (apps/issuer, apps/backpack, apps/badgeuser) and Badgr's published v2 API docs. Authentication is OAuth2 bearer token obtained from /o/token with the scopes rw:profile, rw:issuer, and rw:backpack. Regional deployments share the same paths under api.eu.badgr.io, api.ca.badgr.io, and api.au.badgr.io.
+  description: REST API for the Badgr open digital badging platform (Instructure Canvas Credentials), implementing the Open Badges standard.
   contact:
     name: API Evangelist
     email: kin@apievangelist.com
@@ -37,6 +37,8 @@ paths:
       responses:
         '200':
           description: Assertions awarded by the issuer.
+      operationId: getV2IssuersByEntityIdAssertions
+      x-operation-id-source: derived
   /v2/badgeclasses/{entityId}/issue:
     parameters:
     - name: entityId
@@ -61,6 +63,8 @@ paths:
       responses:
         '201':
           description: Assertions issued.
+      operationId: postV2BadgeclassesByEntityIdIssue
+      x-operation-id-source: derived
   /v2/badgeclasses/{entityId}/assertions:
     parameters:
     - name: entityId
@@ -75,6 +79,8 @@ paths:
       responses:
         '200':
           description: Assertions of the badge class.
+      operationId: getV2BadgeclassesByEntityIdAssertions
+      x-operation-id-source: derived
     post:
       tags:
       - Assertions
@@ -87,6 +93,8 @@ paths:
       responses:
         '201':
           description: Assertion issued.
+      operationId: postV2BadgeclassesByEntityIdAssertions
+      x-operation-id-source: derived
   /v2/assertions/{entityId}:
     parameters:
     - name: entityId
@@ -101,6 +109,8 @@ paths:
       responses:
         '200':
           description: The requested assertion.
+      operationId: getV2AssertionsByEntityId
+      x-operation-id-source: derived
     put:
       tags:
       - Assertions
@@ -108,6 +118,8 @@ paths:
       responses:
         '200':
           description: Assertion updated.
+      operationId: putV2AssertionsByEntityId
+      x-operation-id-source: derived
     delete:
       tags:
       - Assertions
@@ -115,6 +127,8 @@ paths:
       responses:
         '204':
           description: Assertion revoked.
+      operationId: deleteV2AssertionsByEntityId
+      x-operation-id-source: derived
   /v2/assertions/revoke:
     post:
       tags:
@@ -123,6 +137,8 @@ paths:
       responses:
         '200':
           description: Assertions revoked.
+      operationId: postV2AssertionsRevoke
+      x-operation-id-source: derived
   /v2/assertions/changed:
     get:
       tags:
@@ -137,6 +153,8 @@ paths:
       responses:
         '200':
           description: Assertions changed since the given time.
+      operationId: getV2AssertionsChanged
+      x-operation-id-source: derived
 components:
   schemas:
     Assertion:

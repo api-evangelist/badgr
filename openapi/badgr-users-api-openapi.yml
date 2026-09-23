@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Badgr Assertions Users API
+  title: Badgr Users API
   version: '2.0'
-  description: REST API for the Badgr open digital badging platform (Instructure Canvas Credentials), implementing the Open Badges standard. Endpoints and paths in this document are grounded in the open-source badgr-server URL configuration (apps/issuer, apps/backpack, apps/badgeuser) and Badgr's published v2 API docs. Authentication is OAuth2 bearer token obtained from /o/token with the scopes rw:profile, rw:issuer, and rw:backpack. Regional deployments share the same paths under api.eu.badgr.io, api.ca.badgr.io, and api.au.badgr.io.
+  description: REST API for the Badgr open digital badging platform (Instructure Canvas Credentials), implementing the Open Badges standard.
   contact:
     name: API Evangelist
     email: kin@apievangelist.com
@@ -42,6 +42,8 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/User'
+      operationId: getV2UsersSelf
+      x-operation-id-source: derived
     put:
       tags:
       - Users
@@ -49,6 +51,8 @@ paths:
       responses:
         '200':
           description: Profile updated.
+      operationId: putV2UsersSelf
+      x-operation-id-source: derived
   /v2/users/{entityId}:
     parameters:
     - name: entityId
@@ -63,6 +67,8 @@ paths:
       responses:
         '200':
           description: The requested user.
+      operationId: getV2UsersByEntityId
+      x-operation-id-source: derived
     put:
       tags:
       - Users
@@ -70,6 +76,8 @@ paths:
       responses:
         '200':
           description: User updated.
+      operationId: putV2UsersByEntityId
+      x-operation-id-source: derived
   /v2/termsVersions/latest:
     get:
       tags:
@@ -78,6 +86,8 @@ paths:
       responses:
         '200':
           description: The latest terms version.
+      operationId: getV2TermsVersionsLatest
+      x-operation-id-source: derived
 components:
   schemas:
     User:

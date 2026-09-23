@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Badgr Assertions Authentication API
+  title: Badgr Authentication API
   version: '2.0'
-  description: REST API for the Badgr open digital badging platform (Instructure Canvas Credentials), implementing the Open Badges standard. Endpoints and paths in this document are grounded in the open-source badgr-server URL configuration (apps/issuer, apps/backpack, apps/badgeuser) and Badgr's published v2 API docs. Authentication is OAuth2 bearer token obtained from /o/token with the scopes rw:profile, rw:issuer, and rw:backpack. Regional deployments share the same paths under api.eu.badgr.io, api.ca.badgr.io, and api.au.badgr.io.
+  description: REST API for the Badgr open digital badging platform (Instructure Canvas Credentials), implementing the Open Badges standard.
   contact:
     name: API Evangelist
     email: kin@apievangelist.com
@@ -71,6 +71,8 @@ paths:
                     type: string
         '400':
           description: Invalid grant.
+      operationId: postOToken
+      x-operation-id-source: derived
   /o/authorize:
     get:
       tags:
@@ -100,6 +102,8 @@ paths:
       responses:
         '302':
           description: Redirect back to the client with an authorization code.
+      operationId: getOAuthorize
+      x-operation-id-source: derived
   /o/code:
     post:
       tags:
@@ -109,6 +113,8 @@ paths:
       responses:
         '200':
           description: Token issued.
+      operationId: postOCode
+      x-operation-id-source: derived
   /v2/auth/tokens:
     get:
       tags:
@@ -117,6 +123,8 @@ paths:
       responses:
         '200':
           description: A list of access tokens for the authenticated user.
+      operationId: getV2AuthTokens
+      x-operation-id-source: derived
     post:
       tags:
       - Authentication
@@ -124,6 +132,8 @@ paths:
       responses:
         '201':
           description: Access token created.
+      operationId: postV2AuthTokens
+      x-operation-id-source: derived
   /v2/auth/tokens/{entityId}:
     parameters:
     - name: entityId
@@ -138,6 +148,8 @@ paths:
       responses:
         '200':
           description: The access token.
+      operationId: getV2AuthTokensByEntityId
+      x-operation-id-source: derived
     delete:
       tags:
       - Authentication
@@ -145,6 +157,8 @@ paths:
       responses:
         '204':
           description: Token revoked.
+      operationId: deleteV2AuthTokensByEntityId
+      x-operation-id-source: derived
 components:
   securitySchemes:
     OAuth2:

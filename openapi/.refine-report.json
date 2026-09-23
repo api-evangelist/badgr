@@ -1,13 +1,7 @@
 {
   "provider": "badgr",
   "sources": [
-    "badgr-assertions-api-openapi.yml",
-    "badgr-authentication-api-openapi.yml",
-    "badgr-backpack-api-openapi.yml",
-    "badgr-badgeclasses-api-openapi.yml",
-    "badgr-collections-api-openapi.yml",
-    "badgr-issuers-api-openapi.yml",
-    "badgr-users-api-openapi.yml"
+    "_original/badgr-openapi.yml"
   ],
   "outputs": [
     "badgr-assertions-api-openapi.yml",
@@ -21,6 +15,18 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "badgr-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "badgr-assertions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "badgr-authentication-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "badgr-backpack-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "badgr-badgeclasses-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "badgr-collections-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "badgr-issuers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "badgr-users-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
