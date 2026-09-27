@@ -48,7 +48,7 @@ tags:
 - Credentialing
 - Verifiable Credentials
 - Education
-- Open-Source
+- Open Source
 tags_raw:
 - Digital Badges
 - Open Badges
@@ -57,6 +57,7 @@ tags_raw:
 - Verifiable Credentials
 - Education
 - Open Source
+- Open-Source
 created: '2026-07-05'
 modified: '2026-07-05'
 specificationVersion: '0.23'
