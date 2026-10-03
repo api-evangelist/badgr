@@ -140,13 +140,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Status:
-      type: object
-      properties:
-        success:
-          type: boolean
-        description:
-          type: string
     BadgeClass:
       type: object
       properties:
@@ -178,6 +171,13 @@ components:
           type: array
           items:
             type: object
+    Status:
+      type: object
+      properties:
+        success:
+          type: boolean
+        description:
+          type: string
   securitySchemes:
     OAuth2:
       type: oauth2
