@@ -59,7 +59,7 @@ tags_raw:
 - Open Source
 - Open-Source
 created: '2026-07-05'
-modified: '2026-07-05'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: badgr:badgr-assertions-api
@@ -186,6 +186,8 @@ apis:
   - type: Documentation
     url: https://concentricsky.github.io/badge-connect-guide/
 common:
+- url: https://badgr.com/blog/
+  type: Blog
 - type: CapabilityMap
   url: capabilities/badgr-capability-edges.yml
   name: Badgr Business Capability Map
