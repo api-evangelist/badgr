@@ -140,3 +140,45 @@ plans:
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  - subscription
+  units:
+  - negotiated
+  - period
+  plans:
+  - name: Open Source (Self-Hosted)
+    access: free
+    model: free
+    model_how: derived
+    units:
+    - other
+    periods:
+    - month
+  - name: Badgr Free / Canvas Badges Basic (legacy)
+    access: free
+    model: free
+    model_how: derived
+    units:
+    - other
+    periods:
+    - month
+  - name: Badgr Pro / Canvas Credentials (paid)
+    access: paid
+    model: subscription
+    model_how: derived
+    units:
+    - period
+    periods:
+    - year
+  - name: Enterprise / Institutional
+    access: enterprise
+    model: subscription
+    model_how: derived
+    units:
+    - negotiated
+    periods:
+    - year
