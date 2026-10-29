@@ -1,4 +1,4 @@
-# Badgr (badgr)
+# Badgr
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,186 +64,136 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Badgr is an open digital badging and micro-credentialing platform built on the Open Badges standard. Originally created by Concentric Sky, Badgr is now operated by Instructure as Canvas Credentials (and folded into Parchment Digital Badges). It lets organizations issue verifiable, portable achievement badges and lets learners collect them in a shareable Backpack. The platform is backed by the open-source `badgr-server` (github.com/concentricsky/badgr-server, GNU AGPL-3.0), which implements Open Badges 2.0/2.1 (Badge Connect). The documented REST API (base `https://api.badgr.io/v2`, with regional deployments in the EU, Canada, and Australia) uses OAuth2 bearer tokens and exposes Issuers, BadgeClasses, Assertions (awarded badges), the learner Backpack, Collections, and Users.
+Badgr is an open digital badging and micro-credentialing platform built on the Open Badges standard. Originally created by Concentric Sky, Badgr is now operated by Instructure as Canvas Credentials (and folded into Parchment Digital Badges). It lets organizations issue verifiable, portable achievement badges and learners collect them in a shareable Backpack. The platform is backed by the open-source badgr-server (github.com/concentricsky/badgr-server), which implements Open Badges 2.0/2.1 (Badge Connect). The documented REST API (base https://api.badgr.io/v2, with regional deployments in the EU, Canada, and Australia) uses OAuth2 bearer tokens and exposes Issuers, BadgeClasses, Assertions (awarded badges), the learner Backpack, Collections, and Users.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/badgr/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/badgr/refs/heads/main/apis.yml)
+**Areas:** Digital Badges · Open Badges · Micro-Credentials · Credentialing · Verifiable Credentials · Education · Open Source
 
-## Tags
+## Badgr on APIs.io
 
-- Digital Badges
-- Open Badges
-- Micro-Credentials
-- Credentialing
-- Verifiable Credentials
-- Education
-- Open Source
+Everything profiled for Badgr is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/badgr/](https://apis.io/providers/badgr/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (7)
 
-- **Created:** 2026-07-05
-- **Modified:** 2026-07-05
+- [Badgr Assertions API](https://apis.io/apis/badgr/badgr-assertions-api/) — The Assertions API from Badgr — 6 operation(s) for assertions.
+- [Badgr Authentication API](https://apis.io/apis/badgr/badgr-authentication-api/) — The Authentication API from Badgr — 5 operation(s) for authentication.
+- [Badgr Backpack API](https://apis.io/apis/badgr/badgr-backpack-api/) — The Backpack API from Badgr — 5 operation(s) for backpack.
+- [Badgr BadgeClasses API](https://apis.io/apis/badgr/badgr-badgeclasses-api/) — The BadgeClasses API from Badgr — 4 operation(s) for badgeclasses.
+- [Badgr Collections API](https://apis.io/apis/badgr/badgr-collections-api/) — The Collections API from Badgr — 3 operation(s) for collections.
+- [Badgr Issuers API](https://apis.io/apis/badgr/badgr-issuers-api/) — The Issuers API from Badgr — 3 operation(s) for issuers.
+- [Badgr Users API](https://apis.io/apis/badgr/badgr-users-api/) — The Users API from Badgr — 3 operation(s) for users.
 
-## APIs
+### Published properties
 
-### Badgr Issuers API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Create, list, get, update, and delete Issuers - the organizations or programs that award badges. Includes nested access to an issuer's BadgeClasses and Assertions, plus an issuers/changed feed for syncing.
+#### Agentic access (1)
 
-- **Human URL:** [https://api.badgr.io/docs/v2/](https://api.badgr.io/docs/v2/)
-- **Base URL:** `https://api.badgr.io/v2`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Badgr Agentic Access](https://apis.io/agentic-access/badgr/badgr-agentic-access/)
 
-- Issuers
-- Organizations
-- Open Badges
+#### Collections (8)
 
-#### Properties
+Postman and Open Collection request collections.
 
-- [API Reference](https://api.badgr.io/docs/v2/)
-- [Documentation](https://community.canvaslms.com/t5/Canvas-Badges/Canvas-Badges-App-Developers-API-Guide-Quickstart/ta-p/528729)
-- [OpenAPI](openapi/badgr-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/badgr.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/badgr.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Badgr API](https://apis.io/collections/badgr/open-badgr/)
+- [Badgr Assertions API](https://apis.io/collections/badgr/open-badgr-assertions-api/)
+- [Badgr Assertions Authentication API](https://apis.io/collections/badgr/open-badgr-authentication-api/)
+- [Badgr Assertions Backpack API](https://apis.io/collections/badgr/open-badgr-backpack-api/)
+- [Badgr Assertions BadgeClasses API](https://apis.io/collections/badgr/open-badgr-badgeclasses-api/)
+- [Badgr Assertions Collections API](https://apis.io/collections/badgr/open-badgr-collections-api/)
+- [Badgr Assertions Issuers API](https://apis.io/collections/badgr/open-badgr-issuers-api/)
+- [Badgr Assertions Users API](https://apis.io/collections/badgr/open-badgr-users-api/)
 
-### Badgr BadgeClasses API
+#### Security (2)
 
-Define and manage BadgeClasses - the reusable badge templates (name, description, image, criteria, alignments, and tags) that get awarded as Assertions. Supports single and batch issuing plus a badgeclasses/changed feed.
+Authentication, trust centre, and vulnerability disclosure.
 
-- **Human URL:** [https://api.badgr.io/docs/v2/](https://api.badgr.io/docs/v2/)
-- **Base URL:** `https://api.badgr.io/v2`
+- [Badgr Authentication](https://apis.io/security/badgr/badgr-authentication/)
+- [Badgr Domain Security](https://apis.io/security/badgr/badgr-domain-security/)
 
-#### Tags
+#### OAuth scopes (1)
 
-- BadgeClasses
-- Badge Definitions
-- Open Badges
+The permissions the API asks for.
 
-#### Properties
+- [Badgr Scopes](https://apis.io/scopes/badgr/badgr-scopes/)
 
-- [API Reference](https://api.badgr.io/docs/v2/)
-- [Documentation](https://community.canvaslms.com/t5/Canvas-Badges/Canvas-Badges-App-Developers-API-Guide-Quickstart/ta-p/528729)
-- [OpenAPI](openapi/badgr-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/badgr.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/badgr.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Plans and pricing (1)
 
-### Badgr Assertions (Awarded Badges) API
+Published plans, tiers and prices.
 
-Issue, retrieve, update, and revoke Assertions - individual awards of a BadgeClass to a named recipient. Assertions are the verifiable Open Badges objects; supports single and batch issue, batch revoke, and an assertions/changed feed.
+- [Badgr Plans Pricing](https://apis.io/plans/badgr/badgr-plans-pricing/)
 
-- **Human URL:** [https://api.badgr.io/docs/v2/](https://api.badgr.io/docs/v2/)
-- **Base URL:** `https://api.badgr.io/v2`
+#### Rate limits (1)
 
-#### Tags
+Published request limits.
 
-- Assertions
-- Awarded Badges
-- Issuing
-- Verification
+- [Badgr Rate Limits](https://apis.io/rate-limits/badgr/badgr-rate-limits/)
 
-#### Properties
+#### FinOps (1)
 
-- [API Reference](https://api.badgr.io/docs/v2/)
-- [Documentation](https://concentricsky.github.io/badge-connect-guide/)
-- [OpenAPI](openapi/badgr-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/badgr.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/badgr.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+What the API costs to run, by operation.
 
-### Badgr Backpack API
+- [Badgr Finops](https://apis.io/finops/badgr/badgr-finops/)
 
-The learner-side Backpack for badges an earner has received or imported from any Open Badges issuer. List and manage held Assertions, import external badges, retrieve baked badge images, and create public share links.
+## Where to find this API
 
-- **Human URL:** [https://api.badgr.io/docs/v2/](https://api.badgr.io/docs/v2/)
-- **Base URL:** `https://api.badgr.io/v2`
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-#### Tags
-
-- Backpack
-- Earners
-- Portable Credentials
-
-#### Properties
-
-- [API Reference](https://api.badgr.io/docs/v2/)
-- [Documentation](https://concentricsky.github.io/badge-connect-guide/)
-- [OpenAPI](openapi/badgr-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/badgr.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/badgr.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Badgr Collections API
-
-Group Backpack Assertions into named Collections that learners can curate and publish. Create, list, get, update, and delete collections, and generate a public share URL for a collection.
-
-- **Human URL:** [https://api.badgr.io/docs/v2/](https://api.badgr.io/docs/v2/)
-- **Base URL:** `https://api.badgr.io/v2`
-
-#### Tags
-
-- Collections
-- Backpack
-- Sharing
-
-#### Properties
-
-- [API Reference](https://api.badgr.io/docs/v2/)
-- [Documentation](https://concentricsky.github.io/badge-connect-guide/)
-- [OpenAPI](openapi/badgr-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/badgr.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/badgr.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Badgr Users API
-
-Read and update the authenticated user's profile via `/users/self`, manage account emails and the latest terms version. Governs the identity behind both issuing and earning.
-
-- **Human URL:** [https://api.badgr.io/docs/v2/](https://api.badgr.io/docs/v2/)
-- **Base URL:** `https://api.badgr.io/v2`
-
-#### Tags
-
-- Users
-- Profiles
-- Accounts
-
-#### Properties
-
-- [API Reference](https://api.badgr.io/docs/v2/)
-- [Documentation](https://community.canvaslms.com/t5/Canvas-Badges/Canvas-Badges-App-Developers-API-Guide-Quickstart/ta-p/528729)
-- [OpenAPI](openapi/badgr-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/badgr.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/badgr.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Badgr Authentication API
-
-OAuth2 authentication surface. Exchange credentials for a bearer token at `/o/token` (scopes rw:profile rw:issuer rw:backpack), run the authorization-code flow at `/o/authorize` and `/o/code`, and list or revoke issued access tokens at `/v2/auth/tokens`.
-
-- **Human URL:** [https://api.badgr.io/docs/v2/](https://api.badgr.io/docs/v2/)
-- **Base URL:** `https://api.badgr.io`
-
-#### Tags
-
-- Authentication
-- OAuth2
-- Access Tokens
-
-#### Properties
-
-- [API Reference](https://api.badgr.io/docs/v2/)
-- [Documentation](https://community.canvaslms.com/t5/Canvas-Badges/Canvas-Badges-App-Developers-API-Guide-Quickstart/ta-p/528729)
-- [OpenAPI](openapi/badgr-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/badgr.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/badgr.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/concentricsky)
-- [LinkedIn](https://www.linkedin.com/company/instructure)
 - [Website](https://badgr.com)
 - [Documentation](https://api.badgr.io/docs/v2/)
-- [Plans](plans/badgr-plans-pricing.yml)
-- [Rate Limits](rate-limits/badgr-rate-limits.yml)
-- [Fin Ops](finops/badgr-finops.yml)
+- [Blog](https://badgr.com/blog/)
+- [GitHub](https://github.com/concentricsky)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 25.2** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 44.6 |
+| Contract governance | 0.0 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 23.8 |
+| Access clarity | 7.9 |
+
+**Agent readiness 25.4** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | negotiable (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | documented (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 21.6** — Education & Research
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/badgr/](https://apis.io/providers/badgr/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Badgr: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/badgr/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
